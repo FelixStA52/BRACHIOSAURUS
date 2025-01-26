@@ -1,1 +1,1 @@
-
+This section includes the code for the ESP32 (written in Arduino) as well as the python data unpacking code. Upload the code to the microcontrollers (remembering to change the date and time). Afer having taken data, upload the files foud on the micro sd card to a folder along with the python DAQ code. Run the python DAQ code and watch in awe as final data files appear in the same folder.
