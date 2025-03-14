@@ -134,10 +134,6 @@ void setup()
   int realSleepTime = sleepTime * correctionFactor(box_n);
   realSleepTime = static_cast<int>(realSleepTime);
 
-  Serial.begin(115200); //for testing
-  while(!Serial);
-  Serial.println(realSleepTime);
-
   codeEnd = millis();
   epochTime += (codeEnd - codeStart) / 1000 + sleepTime;
 
