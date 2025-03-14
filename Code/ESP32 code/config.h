@@ -10,7 +10,7 @@
 
 #define SEC_TO_SLEEP 21600; //time (seconds) the microcontroller goes to sleep between taking data
 
-#define DEPLOYMENT_START 1754020860 //reasonable satrt time for when the data can be recovered, set to August 1rst
+#define DEPLOYMENT_START 1754020860 //reasonable start time for when the data can be recovered, set to August 1rst
 
 #define DEPLOYMENT_END 1755144060 //reasonable end time for when the data can be recovered, set to August 14th
 
