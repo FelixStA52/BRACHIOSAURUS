@@ -16,6 +16,4 @@
 
 #define DEPLOYMENT_WAIT 600 //max number of seconds to wait for wifi option
 
-#define REMAINING_WIFI_ACCESS_NUMBER 2 //number of times the wifi can be accessed
-
 //set DEPLOYMENT_START and DEPLOYMENT_END to 0 if you do not plan on using the wifi option
