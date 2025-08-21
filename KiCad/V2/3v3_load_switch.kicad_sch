@@ -591,7 +591,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "AP2280-1WG-7"
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP2280.pdf"
 			(at 99.06 97.79 0)
 			(effects
 				(font
