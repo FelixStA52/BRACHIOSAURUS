@@ -14790,7 +14790,7 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "Felix St-Amour\n2025-05-xx"
+	(gr_text "Felix St-Amour\n2025-08-26"
 		(at 103.9 135.025 0)
 		(layer "F.SilkS")
 		(uuid "889e2668-966d-4e59-9706-507f37234ef9")
