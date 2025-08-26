@@ -2455,7 +2455,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LB3218T1R0M:INDC3218X200N"
+		(property "Footprint" "Inductor_SMD:L_1008_2520Metric"
 			(at 95.25 93.98 0)
 			(effects
 				(font
@@ -2483,7 +2483,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC part" "C5289287"
+		(property "LCSC part" "C86092"
 			(at 94.742 98.806 0)
 			(effects
 				(font
@@ -2491,7 +2491,7 @@
 				)
 			)
 		)
-		(property "LCSC price ($US)" "0.0424"
+		(property "LCSC price ($US)" "0.0655"
 			(at 93.472 100.584 0)
 			(effects
 				(font
@@ -2689,7 +2689,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+		(property "Footprint" "Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical"
 			(at 195.326 104.14 90)
 			(effects
 				(font
@@ -2716,7 +2716,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC part" ""
+		(property "LCSC part" "C239362"
 			(at 196.85 104.14 0)
 			(effects
 				(font
@@ -2724,7 +2724,7 @@
 				)
 			)
 		)
-		(property "LCSC price ($US)" ""
+		(property "LCSC price ($US)" "0.0722"
 			(at 196.85 104.14 0)
 			(effects
 				(font
@@ -3282,7 +3282,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+		(property "Footprint" "Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical"
 			(at 195.326 87.63 90)
 			(effects
 				(font
@@ -3309,7 +3309,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC part" ""
+		(property "LCSC part" "C239362"
 			(at 196.85 87.63 0)
 			(effects
 				(font
@@ -3317,7 +3317,7 @@
 				)
 			)
 		)
-		(property "LCSC price ($US)" ""
+		(property "LCSC price ($US)" "0.0722"
 			(at 196.85 87.63 0)
 			(effects
 				(font

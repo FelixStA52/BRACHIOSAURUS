@@ -1220,7 +1220,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LB3218T1R0M:INDC3218X200N"
+		(property "Footprint" "Inductor_SMD:L_1008_2520Metric"
 			(at 128.27 110.49 0)
 			(effects
 				(font
@@ -1248,7 +1248,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC part" "C5289287"
+		(property "LCSC part" "C86092"
 			(at 133.096 110.49 90)
 			(effects
 				(font
@@ -1256,7 +1256,7 @@
 				)
 			)
 		)
-		(property "LCSC price ($US)" "0.0424"
+		(property "LCSC price ($US)" "0.0655"
 			(at 131.826 112.522 90)
 			(effects
 				(font
