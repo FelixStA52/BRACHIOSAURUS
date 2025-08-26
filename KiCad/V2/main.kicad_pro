@@ -58,7 +58,16 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "lib_footprint_mismatch|129440000|42446750|5670267d-4ad3-4948-9a14-aaa65d17db6a|00000000-0000-0000-0000-000000000000",
+          "Don't care"
+        ],
+        [
+          "silk_overlap|176916666|64004819|c4d55c41-8c8a-4e0c-9f28-0578d4b1974d|d19c9a27-4ca4-410e-b9ca-977ea9bfd739",
+          "Don't care"
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -476,7 +485,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.1524,
+        "clearance": 0.127,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -487,7 +496,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 2147483647,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.1524,
+        "track_width": 0.127,
         "via_diameter": 0.6,
         "via_drill": 0.3,
         "wire_width": 6

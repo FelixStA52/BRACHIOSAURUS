@@ -1521,7 +1521,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_SON:Texas_DRC0010J_ThermalVias"
+		(property "Footprint" "Package_SON:VSON-10-1EP_3x3mm_P0.5mm_EP1.65x2.4mm"
 			(at 168.91 116.84 0)
 			(effects
 				(font

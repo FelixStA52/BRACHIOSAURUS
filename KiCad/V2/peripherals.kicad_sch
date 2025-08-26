@@ -2231,7 +2231,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LIS2DW12TR:LGA12R50P4X4_200X200X70"
+		(property "Footprint" "Package_LGA:LGA-12_2x2mm_P0.5mm"
 			(at 137.16 71.12 0)
 			(effects
 				(font
@@ -2441,7 +2441,7 @@
 				)
 			)
 		)
-		(property "Footprint" "singing foot:XCVR_HC-SR04"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
 			(at 170.434 121.412 0)
 			(effects
 				(font
