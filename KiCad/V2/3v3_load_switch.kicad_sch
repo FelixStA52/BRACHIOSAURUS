@@ -563,7 +563,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "0ffa98a1-a1d5-4b57-9c4d-ff22108185aa")
 		(property "Reference" "U4"
 			(at 127 87.63 0)
@@ -608,6 +607,22 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "LCSC part" "C128637"
+			(at 144.272 87.122 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC price ($US)" "0.3642"
+			(at 145.542 89.408 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "3"
@@ -854,7 +869,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "defcf17c-1013-405e-82c1-8a16e0df9d4f")
 		(property "Reference" "C18"
 			(at 187.96 102.8699 0)
@@ -901,6 +915,22 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC part" "C696901"
+			(at 191.008 108.204 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC price ($US)" "0.0034"
+			(at 189.992 110.236 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "3278e259-ad41-4893-a86f-3b28f51a4932")
 		)
@@ -928,7 +958,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "ed433653-6673-46ba-8cdf-aacea27d2b97")
 		(property "Reference" "C5"
 			(at 163.83 105.4099 0)
@@ -973,6 +1002,22 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "LCSC part" "C125205"
+			(at 153.924 109.474 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC price ($US)" "0.0114"
+			(at 154.432 111.506 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"

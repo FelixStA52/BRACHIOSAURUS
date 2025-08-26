@@ -582,6 +582,355 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "PJS008U-3000-0:PJS008U-3000-0"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "Value" "PJS008U-3000-0"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+				)
+			)
+			(property "Footprint" "PJS008U-3000-0:PJS008U-3000-0"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MF" "Yamaichi"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Description_1" "8 Position Card Connector Secure Digital - microSD™ Through Hole Gold-Nickel"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Package" "None"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Price" "None"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "SnapEDA_Link" "https://www.snapeda.com/parts/PJS008U-3000-0/Yamaichi/view-part/?ref=snap"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MP" "PJS008U-3000-0"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Availability" "In Stock"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Check_prices" "https://www.snapeda.com/parts/PJS008U-3000-0/Yamaichi/view-part/?ref=eda"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(symbol "PJS008U-3000-0_0_0"
+				(rectangle
+					(start -25.4 -10.16)
+					(end 25.4 10.16)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -17.78 -5.08) (xy -18.796 -5.08)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(text "Micro SD"
+					(at -5.08 -7.62 0)
+					(effects
+						(font
+							(size 1.778 1.778)
+						)
+						(justify left bottom)
+					)
+				)
+				(pin bidirectional line
+					(at -22.86 15.24 270)
+					(length 5.08)
+					(name "HOUSING_1"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "P$9"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -17.78 15.24 270)
+					(length 5.08)
+					(name "HOUSING_2"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "P$10"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -12.7 15.24 270)
+					(length 5.08)
+					(name "8_DAT1/X"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "P$8"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -7.62 15.24 270)
+					(length 5.08)
+					(name "7_DAT0/D0"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "P$7"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -2.54 15.24 270)
+					(length 5.08)
+					(name "6_VSS/GND"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "P$6"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 2.54 15.24 270)
+					(length 5.08)
+					(name "5_CLK"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "P$5"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 7.62 15.24 270)
+					(length 5.08)
+					(name "4_VDD"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "P$4"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 12.7 15.24 270)
+					(length 5.08)
+					(name "3_CMD/DI"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "P$3"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 17.78 15.24 270)
+					(length 5.08)
+					(name "2_CD/DAT3/CS"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "P$2"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 22.86 15.24 270)
+					(length 5.08)
+					(name "1_DAT2/X"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "P$1"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Singing Poles Symbols:HC-SR04"
 			(pin_names
 				(offset 1.016)
@@ -812,220 +1161,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Singing Poles Symbols:uSD_up_mount"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "U"
-				(at -10.414 7.62 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" ""
-				(at 1.27 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 1.27 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 1.27 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 1.27 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "uSD_up_mount_1_1"
-				(rectangle
-					(start -11.43 6.35)
-					(end 11.43 -6.35)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(text "uSD up mount"
-					(at -0.508 3.302 0)
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(pin input line
-					(at -8.89 -8.89 90)
-					(length 2.54)
-					(name "DAT2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -6.35 -8.89 90)
-					(length 2.54)
-					(name "CS"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -3.81 -8.89 90)
-					(length 2.54)
-					(name "DI"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -1.27 -8.89 90)
-					(length 2.54)
-					(name "VDD"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 1.27 -8.89 90)
-					(length 2.54)
-					(name "CLK"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 3.81 -8.89 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 6.35 -8.89 90)
-					(length 2.54)
-					(name "D0"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 8.89 -8.89 90)
-					(length 2.54)
-					(name "DAT1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "power:GND"
 			(power)
 			(pin_numbers
@@ -1138,16 +1273,6 @@
 		)
 		(uuid "04642569-4332-4019-add5-5438ef3082ec")
 	)
-	(text "Micro-SD Socket"
-		(exclude_from_sim no)
-		(at 114.554 95.25 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "20e7909f-dda9-47fb-b384-f9b051cc5f0e")
-	)
 	(junction
 		(at 168.91 60.96)
 		(diameter 0)
@@ -1185,12 +1310,20 @@
 		(uuid "f3b9acc1-4590-4f04-a7e8-3f0f2e6b5eff")
 	)
 	(no_connect
-		(at 127 113.03)
-		(uuid "61b200fa-10ce-4b27-bb0f-1f1b694fa6cb")
+		(at 128.27 123.19)
+		(uuid "6eb4db65-f724-44c6-882f-89dd501e44c1")
 	)
 	(no_connect
-		(at 109.22 113.03)
-		(uuid "be9a263f-0e18-4dc6-b77f-eadd501d2edc")
+		(at 133.35 123.19)
+		(uuid "cdea0917-bf66-4e33-99e6-82cc54fc3a78")
+	)
+	(no_connect
+		(at 92.71 123.19)
+		(uuid "d5b6bcbd-f777-4e15-9680-172e0a8cc43e")
+	)
+	(no_connect
+		(at 138.43 123.19)
+		(uuid "f82a6af0-cc28-4980-8925-61f684896faf")
 	)
 	(wire
 		(pts
@@ -1231,16 +1364,6 @@
 			(type default)
 		)
 		(uuid "1468639f-1788-42f6-8cef-032d97517e2f")
-	)
-	(wire
-		(pts
-			(xy 124.46 113.03) (xy 124.46 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "195116d0-3a7b-4708-ad87-6ecbbf22d881")
 	)
 	(wire
 		(pts
@@ -1324,26 +1447,6 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 113.03) (xy 111.76 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9ac425a0-ab2e-47d4-bf58-17415c98eee8")
-	)
-	(wire
-		(pts
-			(xy 114.3 113.03) (xy 114.3 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bccf03d6-9d12-428c-88c7-0159dbdff300")
-	)
-	(wire
-		(pts
 			(xy 166.37 109.22) (xy 187.96 109.22)
 		)
 		(stroke
@@ -1361,16 +1464,6 @@
 			(type default)
 		)
 		(uuid "e834373d-1fd7-4078-922e-b4f1b595f31a")
-	)
-	(wire
-		(pts
-			(xy 119.38 113.03) (xy 119.38 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "eb3b93d8-1028-4fd5-b49b-2fd817ffe69a")
 	)
 	(wire
 		(pts
@@ -1393,38 +1486,27 @@
 		)
 		(uuid "157d82be-e14c-4ad6-b304-768b28350603")
 	)
-	(hierarchical_label "MOSI"
-		(shape bidirectional)
-		(at 114.3 120.65 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "3206e4cf-112d-4a3d-92e5-9959de12d45d")
-	)
 	(hierarchical_label "SCLK"
 		(shape input)
-		(at 119.38 120.65 270)
+		(at 113.03 123.19 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "3d8eda38-8531-4514-8ef7-261ee0725a01")
+		(uuid "30237925-9d02-4ff6-a90c-4d2878975ac8")
 	)
-	(hierarchical_label "uSD_CS"
-		(shape input)
-		(at 111.76 120.65 270)
+	(hierarchical_label "MISO"
+		(shape bidirectional)
+		(at 123.19 123.19 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "6498bb5a-4364-4386-87ce-18604d9de519")
+		(uuid "30f76e4b-b26c-4b6c-ba28-6a5f016ab396")
 	)
 	(hierarchical_label "TRIG"
 		(shape input)
@@ -1448,27 +1530,38 @@
 		)
 		(uuid "9b2cc14e-27c4-4835-a20a-bf133da5f43b")
 	)
+	(hierarchical_label "uSD_CS"
+		(shape input)
+		(at 97.79 123.19 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b2f9f844-e967-4271-b49b-3d36ed21381e")
+	)
+	(hierarchical_label "MOSI"
+		(shape bidirectional)
+		(at 102.87 123.19 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "b7e6f57a-2749-4e9f-8170-f1bbb85cda10")
+	)
 	(hierarchical_label "V_SD"
 		(shape input)
-		(at 116.84 113.03 270)
+		(at 107.95 123.19 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "a93f3868-e688-49bf-884d-b0715ef6cad5")
-	)
-	(hierarchical_label "MISO"
-		(shape bidirectional)
-		(at 124.46 120.65 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "abc06e9e-046b-4b42-bd24-cff12d08af90")
+		(uuid "ba996ffe-3eb1-4e2b-a47b-4ec42b09fa4d")
 	)
 	(hierarchical_label "V_3V"
 		(shape input)
@@ -1544,7 +1637,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "12292ca0-1d8c-4e3b-8202-43d3791d5b4f")
 		(property "Reference" "R11"
 			(at 190.5 124.4599 0)
@@ -1591,6 +1683,22 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC part" "C2513459"
+			(at 181.356 124.206 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC price ($US)" "0.0721"
+			(at 180.594 126.492 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "0d1610f4-8a00-48de-8848-61c7de8a4273")
 		)
@@ -1614,7 +1722,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "36d53668-2101-4f0c-b683-baec5bc9c549")
 		(property "Reference" "C8"
 			(at 185.42 55.8799 0)
@@ -1661,6 +1768,22 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC part" "C38898"
+			(at 187.198 50.292 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC price ($US)" "0.0068"
+			(at 187.96 52.578 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "69e468a8-37a5-4ff0-8b69-bd73d04eaddf")
 		)
@@ -1671,72 +1794,6 @@
 			(project "main"
 				(path "/5f03be96-74fe-4c06-80f9-3781f1b12b86/44e829b8-bac1-49ab-bfb3-203a4b03faa3"
 					(reference "C8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 121.92 113.03 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "49286d5d-958f-459d-a8ee-4f6155d9fcb4")
-		(property "Reference" "#PWR02"
-			(at 121.92 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 121.92 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 121.92 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 121.92 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 121.92 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "1388a61b-de8b-4010-8d65-226856793a43")
-		)
-		(instances
-			(project "main"
-				(path "/5f03be96-74fe-4c06-80f9-3781f1b12b86/44e829b8-bac1-49ab-bfb3-203a4b03faa3"
-					(reference "#PWR02")
 					(unit 1)
 				)
 			)
@@ -1875,6 +1932,196 @@
 		)
 	)
 	(symbol
+		(lib_id "PJS008U-3000-0:PJS008U-3000-0")
+		(at 115.57 107.95 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7a91a48a-bae3-41b9-98f5-d73c137d39b8")
+		(property "Reference" "U8"
+			(at 88.9 109.2201 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "PJS008U-3000-0"
+			(at 88.9 106.6801 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "PJS008U-3000-0:PJS008U-3000-0"
+			(at 115.57 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 115.57 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 115.57 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "Yamaichi"
+			(at 115.57 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "8 Position Card Connector Secure Digital - microSD™ Through Hole Gold-Nickel"
+			(at 115.57 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "None"
+			(at 115.57 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 115.57 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/PJS008U-3000-0/Yamaichi/view-part/?ref=snap"
+			(at 115.57 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "PJS008U-3000-0"
+			(at 115.57 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "In Stock"
+			(at 115.57 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/PJS008U-3000-0/Yamaichi/view-part/?ref=eda"
+			(at 115.57 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "LCSC part" "C3177022"
+			(at 96.266 93.472 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC price ($US)" "2.0000"
+			(at 94.996 95.758 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "P$7"
+			(uuid "ecf253ca-9a66-4a1b-a538-796104f281f9")
+		)
+		(pin "P$2"
+			(uuid "ded57fcd-ef5f-40c0-9256-ebff56239f19")
+		)
+		(pin "P$1"
+			(uuid "dba2c209-97f2-41d6-8e24-4f25898d6292")
+		)
+		(pin "P$3"
+			(uuid "5957ce6f-5ba1-493c-b537-ad890f991b0a")
+		)
+		(pin "P$8"
+			(uuid "13fc16d8-c3f6-4cfb-9dde-8c9d0ae99ef0")
+		)
+		(pin "P$5"
+			(uuid "ee860419-2ec4-40c6-8fb4-ef5f5e5cace1")
+		)
+		(pin "P$4"
+			(uuid "dcdbe382-3ea2-4d41-a9aa-3f81986d44f9")
+		)
+		(pin "P$6"
+			(uuid "0c125231-41ab-45b5-b7bd-1dfd45d30f96")
+		)
+		(pin "P$9"
+			(uuid "b340cd23-09cf-4ad7-8ce0-762c3789834c")
+		)
+		(pin "P$10"
+			(uuid "1ccfe016-b601-4b6b-8a6d-c7874f719e1e")
+		)
+		(instances
+			(project ""
+				(path "/5f03be96-74fe-4c06-80f9-3781f1b12b86/44e829b8-bac1-49ab-bfb3-203a4b03faa3"
+					(reference "U8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 187.96 113.03 180)
 		(unit 1)
@@ -1882,7 +2129,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "8f1415aa-adeb-4ed7-a80c-d19bcd724540")
 		(property "Reference" "R10"
 			(at 190.5 111.7599 0)
@@ -1929,6 +2175,22 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC part" "C269701"
+			(at 182.118 113.284 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC price ($US)" "0.0036"
+			(at 182.88 115.316 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "f2ebfe3e-2efb-4df4-858e-1ecd15f866ae")
 		)
@@ -1952,7 +2214,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "a0b133b7-f5a0-4cf7-82a3-6b361481617f")
 		(property "Reference" "U7"
 			(at 137.16 53.34 0)
@@ -2026,6 +2287,22 @@
 				)
 				(justify bottom)
 				(hide yes)
+			)
+		)
+		(property "LCSC part" "C189624"
+			(at 148.082 53.594 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC price ($US)" "0.5988"
+			(at 149.098 55.626 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -2282,6 +2559,22 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC part" ""
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC price ($US)" ""
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "774a876e-11c0-439d-8035-c0913bbff04c")
 		)
@@ -2298,94 +2591,6 @@
 			(project "main"
 				(path "/5f03be96-74fe-4c06-80f9-3781f1b12b86/44e829b8-bac1-49ab-bfb3-203a4b03faa3"
 					(reference "U1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Singing Poles Symbols:uSD_up_mount")
-		(at 118.11 104.14 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c54e3252-0f07-45e2-b939-1a9c4df12faf")
-		(property "Reference" "U5"
-			(at 130.81 103.5049 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "~"
-			(at 130.81 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "uSD mount (up)"
-			(at 119.38 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 119.38 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 119.38 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "52567c3c-9f38-4c21-b4da-d0c841d71348")
-		)
-		(pin "6"
-			(uuid "3b845f0f-eafb-4074-a78d-6afcea875c78")
-		)
-		(pin "5"
-			(uuid "faab9544-1d3c-464a-9473-834a42bf4c6a")
-		)
-		(pin "1"
-			(uuid "6056dc8a-1875-4e69-9ff0-fb71209bc914")
-		)
-		(pin "3"
-			(uuid "a7f1e27f-2cb9-4cf8-afee-1226cc0a4093")
-		)
-		(pin "4"
-			(uuid "028c6f2c-a7f9-420a-a63d-5d2e6960e1eb")
-		)
-		(pin "7"
-			(uuid "8b88523b-0419-4327-8b97-a7f02f4332dd")
-		)
-		(pin "8"
-			(uuid "1d746c50-47fe-4767-98c4-486dbd4382b1")
-		)
-		(instances
-			(project "main"
-				(path "/5f03be96-74fe-4c06-80f9-3781f1b12b86/44e829b8-bac1-49ab-bfb3-203a4b03faa3"
-					(reference "U5")
 					(unit 1)
 				)
 			)
@@ -2524,6 +2729,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 118.11 123.19 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d9931cec-71aa-4b2b-89e6-1b062a5a7587")
+		(property "Reference" "#PWR03"
+			(at 118.11 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 118.11 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 118.11 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 118.11 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 118.11 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c7160461-78ce-40fb-9c6b-0570aa281aed")
+		)
+		(instances
+			(project "main"
+				(path "/5f03be96-74fe-4c06-80f9-3781f1b12b86/44e829b8-bac1-49ab-bfb3-203a4b03faa3"
+					(reference "#PWR03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 168.91 57.15 180)
 		(unit 1)
@@ -2531,7 +2802,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "e0464596-faf8-4d7a-8f5a-cabe763641d9")
 		(property "Reference" "C7"
 			(at 165.1 58.4201 0)
@@ -2576,6 +2846,22 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "LCSC part" "C125205"
+			(at 163.068 53.594 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC price ($US)" "0.0114"
+			(at 162.814 51.562 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
