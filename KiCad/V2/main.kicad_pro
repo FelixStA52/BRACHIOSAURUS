@@ -62,10 +62,6 @@
         [
           "lib_footprint_mismatch|129440000|42446750|5670267d-4ad3-4948-9a14-aaa65d17db6a|00000000-0000-0000-0000-000000000000",
           "Don't care"
-        ],
-        [
-          "silk_overlap|176916666|64004819|c4d55c41-8c8a-4e0c-9f28-0578d4b1974d|d19c9a27-4ca4-410e-b9ca-977ea9bfd739",
-          "Don't care"
         ]
       ],
       "meta": {

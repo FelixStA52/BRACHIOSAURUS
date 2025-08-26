@@ -1254,13 +1254,13 @@
 	)
 	(symbol
 		(lib_id "Transistor_FET:Q_PMOS_GSD")
-		(at 147.32 85.09 90)
+		(at 147.32 85.09 270)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "94b3db63-7e63-4ce6-ab75-6e03f46fc543")
 		(property "Reference" "Q2"
 			(at 147.32 76.2 90)
@@ -1279,7 +1279,7 @@
 			)
 		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 144.78 80.01 0)
+			(at 149.86 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
