@@ -5,6 +5,7 @@ import os
 import datetime
 from processing_helpers import *
 from parameters import *
+plt.style.use('tableau-colorblind10')
 
 data_processing = PROCESSING
 DONT_USE_SECOND_PEAK = SECOND_PEAK
@@ -13,7 +14,7 @@ main_dir = DIR
 script_directory = os.path.dirname(os.path.abspath(__file__))
 box_n=make_boxes()
 
-def peek_data(parameter, start_date_str, end_date_str, box_number=None, x_lim=False, y_lim=False):
+def peek_data(parameter, start_date_str, end_date_str, box_number=None, x_lim=False, y_lim=False, title_size=12):
     """
     Peek raw data, as saved on the micro SD cards of the boxes
 
@@ -124,15 +125,16 @@ def peek_data(parameter, start_date_str, end_date_str, box_number=None, x_lim=Fa
             
             # Set plot title and labels
             if parameter == "peaks":
-                plt.title(f"Raw {param_config[parameter]['label']} - Box {box}\n{start_date_str} to {end_date_str}")
-                plt.xlabel("UTC Time")
-                plt.ylabel(param_config[parameter]["ylabel"])
+                plt.title(f"Raw {param_config[parameter]['label']} - Box {box}", fontsize=title_size)
+                plt.xlabel("UTC Time", size=title_size)
+                plt.ylabel(param_config[parameter]["ylabel"], size=title_size)
             else:
-                plt.title(f"Raw {config['label']} Data with Errors - Box {box}\n{start_date_str} to {end_date_str}")
-                plt.xlabel("UTC Time")
-                plt.ylabel(f"{config['label']} ({config['unit']})")
+                plt.title(f"Raw {config['label']} Data with Errors - Box {box}", fontsize=title_size)
+                plt.xlabel("UTC Time", size=title_size)
+                plt.ylabel(f"{config['label']} ({config['unit']})", size=title_size)
             
-            plt.legend()
+            plt.legend(fontsize=20)
+            plt.grid()
             plt.xticks(rotation=45)
             plt.tight_layout()
             
@@ -159,24 +161,39 @@ def peek_data(parameter, start_date_str, end_date_str, box_number=None, x_lim=Fa
         except Exception as e:
             print(f"Error processing box {box}: {str(e)}")
             
-def peek_pdata(parameter, start_date_str, end_date_str, box_number=None, x_lim=False, y_lim=False):
+def peek_pdata(parameter, start_date_str, end_date_str, box_number=None, x_lim=False, y_lim=False, title_size=12, overlap=None, overlap_y_lim=False):
     """
     Plots processed data (from processed_data_*.csv files) for a given parameter.
 
     Parameters:
         parameter (str): The parameter to plot. Options: 'temp', 'motion' (length as computed from motion bin files),
-            'data' (length as computed from the data csv files), 'depth', or 'all' (motion + data + depth).
-        start_date_str (str): Start date in YYYYMMDD or YYYYMMDDHH format.
-        end_date_str (str): End date in YYYYMMDD or YYYYMMDDHH format.
+            'data' (length as computed from the data csv files), 'depth', 'f1' (fundamental frequency 1),
+            'f2' (fundamental frequency 2), 'both_f' (both f1 and f2), 'l1' (length from fundamental frequency 1),
+            'l2' (length from fundamental frequency 2), 'both_l' (both l1 and l2), 'full' (motion + depth), 
+            or 'all' (motion + data + depth).
+        start_date_str (str): Start date in YYYYMMDD, YYYYMMDDHH, or YYYYMMDDHHMM format.
+        end_date_str (str): End date in YYYYMMDD, YYYYMMDDHH, or YYYYMMDDHHMM format.
         box_number (int, optional): Specific box number to plot. If None, plots all boxes.
-        x_lim (tuple (str, str), optional): Left and right limit of the x axis for the plot. Use "YYYYMMDD" or "YYYYMMDDHH".
-        y_lim (tuple (float, float), optional): Bottom and top limit of the y axis for the plot.
+        x_lim (tuple (str, str), optional): Left and right limit of the x axis for the plot. Use "YYYYMMDD", "YYYYMMDDHH", or "YYYYMMDDHHMM".
+        y_lim (tuple (float, float), optional): Bottom and top limit of the y axis for the plot (main parameter).
+        overlap (list, optional): List of additional parameters to overlay on a separate y-axis. 
+            Example: overlap=['motion', 'depth'] to add motion and depth on the right y-axis.
+        overlap_y_lim (tuple (float, float), optional): Bottom and top limit of the right y axis for overlap parameters.
         
     Example use:
-        peek_pdata("temp", "2025050500", "2025052512", box_number=8, x_lim=("20250501","20250601"), y_lim=(-40,20))
+        peek_pdata("temp", "202505050000", "202505251200", box_number=8, x_lim=("202505010000","202506010000"), y_lim=(-40,20))
         peek_pdata("motion", "20250505", "20250525")
         peek_pdata("data", "20250505", "20250525", y_lim=(0.8,1))
+        peek_pdata("f1", "20250505", "20250525", y_lim=(0,50))
+        peek_pdata("f2", "20250505", "20250525", y_lim=(0,100))
+        peek_pdata("both_f", "20250505", "20250525", y_lim=(0,100))
+        peek_pdata("l1", "20250505", "20250525", y_lim=(0.8,1.2))
+        peek_pdata("l2", "20250505", "20250525", y_lim=(0.8,1.2))
+        peek_pdata("both_l", "20250505", "20250525", y_lim=(0.8,1.2))
+        peek_pdata("full", "20250505", "20250525", y_lim=(0,5))
         peek_pdata("all", "2025050500", "2025052512", y_lim=(0,5))
+        peek_pdata("motion", "20250505", "20250525", overlap=['depth', 'data'], y_lim=(0,5), overlap_y_lim=(0,3))
+        peek_pdata("temp", "20250505", "20250525", overlap=['motion'], y_lim=(-40,20), overlap_y_lim=(0.8,1.2))
     """
     # Parameter configuration with value and error columns
     param_config = {
@@ -184,30 +201,62 @@ def peek_pdata(parameter, start_date_str, end_date_str, box_number=None, x_lim=F
             "val_col": 1,  # Temperature value column
             "err_col": -1,  # No error column for temperature
             "label": "Temperature",
-            "unit": "°C"
+            "unit": "°C",
+            "color": "purple"
         },
         "motion": {
             "val_col": 2,  # Motion length value column
             "err_col": 3,  # Motion length error column
-            "label": "Motion Length",
-            "unit": "m"
+            "label": "Computed Length",
+            "unit": "m",
+            "color": "deepskyblue"
         },
         "data": {
             "val_col": 4,  # Data length value column
             "err_col": 5,  # Data length error column
-            "label": "Data Length",
-            "unit": "m"
+            "label": "Microcontroller Analysis Length",
+            "unit": "m",
+            "color": "royalblue"
         },
         "depth": {
             "val_col": 6,  # Depth sensor value column
             "err_col": 7,  # Depth sensor error column
-            "label": "Depth Sensor",
-            "unit": "m"
+            "label": "Depth Sensor Length",
+            "unit": "m",
+            "color": "blue"
+        },
+        "f1": {
+            "val_col": 8,  # F1 frequency value column
+            "err_col": 9,  # F1 frequency error column
+            "label": "Fundamental Frequency 1",
+            "unit": "Hz",
+            "color": "red"
+        },
+        "f2": {
+            "val_col": 10,  # F2 frequency value column
+            "err_col": 11,  # F2 frequency error column
+            "label": "Fundamental Frequency 2",
+            "unit": "Hz",
+            "color": "orange"
+        },
+        "l1": {
+            "val_col": 12,  # L1 length value column (from F1)
+            "err_col": 13,  # L1 length error column
+            "label": "Length from F1",
+            "unit": "m",
+            "color": "dodgerblue"
+        },
+        "l2": {
+            "val_col": 14,  # L2 length value column (from F2)
+            "err_col": 15,  # L2 length error column
+            "label": "Length from F2",
+            "unit": "m",
+            "color": "fuchsia"
         }
     }
 
     # Validate parameter
-    valid_parameters = ["temp", "motion", "data", "depth", "all"]
+    valid_parameters = ["temp", "motion", "data", "depth", "f1", "f2", "both_f", "l1", "l2", "both_l", "all", "full"]
     if parameter not in valid_parameters:
         raise ValueError(f"Invalid parameter. Use: {', '.join(valid_parameters)}")
 
@@ -215,12 +264,10 @@ def peek_pdata(parameter, start_date_str, end_date_str, box_number=None, x_lim=F
     plot_dir = os.path.join(script_directory, PROCESSED_DATA_PLOTS_FOLDER)
     os.makedirs(plot_dir, exist_ok=True)
     
-    # Get Unix timestamp range and convert to integer hour representation
+    # Get Unix timestamp range and convert to integer minute representation
     start_ts_unix, end_ts_unix = get_unix_time_range(start_date_str, end_date_str)
-    start_dt = datetime.datetime.utcfromtimestamp(start_ts_unix)
-    end_dt = datetime.datetime.utcfromtimestamp(end_ts_unix)
-    start_int = int(start_dt.strftime("%Y%m%d%H"))
-    end_int = int(end_dt.strftime("%Y%m%d%H"))
+    start_int = int(unix_to_yyyymmddhhmm(start_ts_unix))
+    end_int = int(unix_to_yyyymmddhhmm(end_ts_unix))
     
     # Determine boxes to process
     boxes = [box_number] if box_number is not None else box_n
@@ -238,51 +285,294 @@ def peek_pdata(parameter, start_date_str, end_date_str, box_number=None, x_lim=F
             # Handle single-row case
             if processed_data.ndim == 1:
                 processed_data = processed_data.reshape(1, -1)
-            
-            time_mask = (processed_data[:, 0] >= start_int) & (processed_data[:, 0] <= end_int)
+
+            data_timestamps = processed_data[:, 0].astype(np.int64)
+            time_mask = (data_timestamps >= start_int) & (data_timestamps <= end_int)
             filtered_data = processed_data[time_mask]
             
             if len(filtered_data) == 0:
                 print(f"No data for box {box} in range")
                 continue
                 
-            # Convert timestamps to datetime
-            timestamps = [
-                datetime.datetime.strptime(str(int(ts)), "%Y%m%d%H")
+            # Convert timestamps to datetime - keep original for all parameters
+            original_timestamps = [
+                datetime.datetime.strptime(str(int(ts)), "%Y%m%d%H%M")
                 for ts in filtered_data[:, 0]
             ]
             
-            plt.figure(figsize=(12, 6))
+            fig, ax1 = plt.subplots(figsize=(12, 6))
+            ax2 = None  # Initialize ax2 as None at the top level
+            
+            # Function to plot a single parameter
+            def plot_parameter(param_name, timestamps, data, axis, alpha=1.0, show_stats=True):
+                if param_name not in param_config:
+                    print(f"Warning: Unknown parameter '{param_name}' in overlap list")
+                    return None, None
+                    
+                config = param_config[param_name]
+                vals = data[:, config["val_col"]].copy()
+                errs = data[:, config["err_col"]].copy() if config["err_col"] != -1 else None
+                
+                # Create copies of timestamps for this parameter
+                param_timestamps = timestamps.copy()
+                
+                # For frequency parameters, filter out NaN and zero values
+                if param_name in ["f1", "f2"]:
+                    valid_mask = ~(np.isnan(vals) | (vals == 0))
+                    vals = vals[valid_mask]
+                    if errs is not None:
+                        errs = errs[valid_mask]
+                    param_timestamps = [param_timestamps[i] for i in range(len(param_timestamps)) if valid_mask[i]]
+                
+                # For length measurements (including L1 and L2), filter out large error values
+                if param_name in ["motion", "data", "depth", "l1", "l2"] and errs is not None:
+                    large_err_mask = errs > 0.1
+                    vals[large_err_mask] = np.nan
+                    errs[large_err_mask] = np.nan
+                
+                label = f"{config['label']} ({config['unit']})"
+                axis.errorbar(param_timestamps, vals, yerr=errs, fmt='o', 
+                           color=config['color'], capsize=5, label=label, alpha=alpha)
+                
+                if show_stats:
+                    print(f"[Box {box}] {param_name} - Mean value: {np.nanmean(vals):.4f}")
+                    print(f"[Box {box}] {param_name} - Std: {np.nanstd(vals):.4f}")
+                
+                return vals, param_timestamps
             
             if parameter == "all":
-                # Plot data, motion, and depth on the same plot
-                for param in ["data", "motion", "depth"]:
-                    config = param_config[param]
-                    vals = filtered_data[:, config["val_col"]]
-                    errs = filtered_data[:, config["err_col"]] if config["err_col"] != -1 else None
-                    label = f"{config['label']} ({config['unit']})"
-                    plt.errorbar(timestamps, vals, yerr=errs, fmt='o', capsize=5, label=label)
+                # Plot data, motion, and depth on the same plot (left axis)
+                for param in ["depth", "motion", "data"]:
+                    plot_parameter(param, original_timestamps, filtered_data, ax1, alpha=0.7, show_stats=False)
+                
+                # Create second y-axis for overlap parameters if specified
+                if overlap:
+                    ax2 = ax1.twinx()
+                    for overlap_param in overlap:
+                        plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
                 
                 # Set plot title and labels
-                plt.title(f"Processed Data, Motion, and Depth - Box {box}\n{start_date_str} to {end_date_str}")
-                plt.xlabel("UTC Time")
-                plt.ylabel("Value (m)")
+                if overlap:
+                    valid_overlap = [p for p in overlap if p in param_config]
+                    if valid_overlap:
+                        overlap_names = ", ".join([param_config[p]['label'] for p in valid_overlap])
+                        ax1.set_title(f"Lengths as Measured by BRACHIOSAURUS with {overlap_names} - Box {box}", fontsize=title_size)
+                        
+                        # Set y-axis labels
+                        ax1.set_ylabel("Length (m)", size=title_size)
+                        
+                        # For right y-axis, use specific label for single parameter or generic for multiple
+                        if len(valid_overlap) == 1:
+                            # Single overlap parameter - use its specific label
+                            overlap_param = valid_overlap[0]
+                            ax2.set_ylabel(f"{param_config[overlap_param]['label']} ({param_config[overlap_param]['unit']})", size=title_size)
+                        else:
+                            # Multiple overlap parameters - check if units are the same
+                            overlap_units = [param_config[p]['unit'] for p in valid_overlap]
+                            if len(set(overlap_units)) == 1:
+                                ax2.set_ylabel(f"Value ({overlap_units[0]})", size=title_size)
+                            else:
+                                ax2.set_ylabel("Overlap Parameters", size=title_size)
+                        
+                        # Color the y-axis tick labels to match their data
+                        ax1.tick_params(axis='y', labelcolor='black')
+                        ax2.tick_params(axis='y', labelcolor='black')
+                    else:
+                        ax1.set_title(f"Lengths as Measured by BRACHIOSAURUS Through Time - Box {box}", fontsize=title_size)
+                        ax1.set_ylabel("Length (m)", size=title_size)
+                else:
+                    ax1.set_title(f"Lengths as Measured by BRACHIOSAURUS Through Time - Box {box}", fontsize=title_size)
+                    ax1.set_ylabel("Length (m)", size=title_size)
+                
+                ax1.set_xlabel("UTC Time", size=title_size)
+                
+            elif parameter == "full":
+                # Plot motion and depth on the same plot (left axis)
+                for param in ["depth", "motion"]:
+                    plot_parameter(param, original_timestamps, filtered_data, ax1, alpha=0.7, show_stats=False)
+                
+                # Create second y-axis for overlap parameters if specified
+                if overlap:
+                    ax2 = ax1.twinx()
+                    for overlap_param in overlap:
+                        plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
+                
+                # Set plot title and labels
+                if overlap:
+                    valid_overlap = [p for p in overlap if p in param_config]
+                    if valid_overlap:
+                        overlap_names = ", ".join([param_config[p]['label'] for p in valid_overlap])
+                        ax1.set_title(f"Motion and Depth Measurements with {overlap_names} - Box {box}", fontsize=title_size)
+                        
+                        # Set y-axis labels
+                        ax1.set_ylabel("Length (m)", size=title_size)
+                        
+                        # For right y-axis, use specific label for single parameter or generic for multiple
+                        if len(valid_overlap) == 1:
+                            # Single overlap parameter - use its specific label
+                            overlap_param = valid_overlap[0]
+                            ax2.set_ylabel(f"{param_config[overlap_param]['label']} ({param_config[overlap_param]['unit']})", size=title_size)
+                        else:
+                            # Multiple overlap parameters - check if units are the same
+                            overlap_units = [param_config[p]['unit'] for p in valid_overlap]
+                            if len(set(overlap_units)) == 1:
+                                ax2.set_ylabel(f"Value ({overlap_units[0]})", size=title_size)
+                            else:
+                                ax2.set_ylabel("Overlap Parameters", size=title_size)
+                        
+                        # Color the y-axis tick labels to match their data
+                        ax1.tick_params(axis='y', labelcolor='black')
+                        ax2.tick_params(axis='y', labelcolor='black')
+                    else:
+                        ax1.set_title(f"Motion and Depth Measurements - Box {box}", fontsize=title_size)
+                        ax1.set_ylabel("Length (m)", size=title_size)
+                else:
+                    ax1.set_title(f"Motion and Depth Measurements - Box {box}", fontsize=title_size)
+                    ax1.set_ylabel("Length (m)", size=title_size)
+                
+                ax1.set_xlabel("UTC Time", size=title_size)
+                
+            elif parameter == "both_f":
+                # Plot both f1 and f2 frequencies on the same plot (left axis)
+                for param in ["f1", "f2"]:
+                    plot_parameter(param, original_timestamps, filtered_data, ax1, alpha=0.7, show_stats=False)
+                
+                # Create second y-axis for overlap parameters if specified
+                if overlap:
+                    ax2 = ax1.twinx()
+                    for overlap_param in overlap:
+                        plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
+                
+                # Set plot title and labels
+                if overlap:
+                    valid_overlap = [p for p in overlap if p in param_config]
+                    if valid_overlap:
+                        overlap_names = ", ".join([param_config[p]['label'] for p in valid_overlap])
+                        ax1.set_title(f"Fundamental Frequencies with {overlap_names} - Box {box}", fontsize=title_size)
+                        
+                        # Set y-axis labels
+                        ax1.set_ylabel("Frequency (Hz)", size=title_size)
+                        
+                        # For right y-axis, use specific label for single parameter or generic for multiple
+                        if len(valid_overlap) == 1:
+                            # Single overlap parameter - use its specific label
+                            overlap_param = valid_overlap[0]
+                            ax2.set_ylabel(f"{param_config[overlap_param]['label']} ({param_config[overlap_param]['unit']})", size=title_size)
+                        else:
+                            # Multiple overlap parameters - check if units are the same
+                            overlap_units = [param_config[p]['unit'] for p in valid_overlap]
+                            if len(set(overlap_units)) == 1:
+                                ax2.set_ylabel(f"Value ({overlap_units[0]})", size=title_size)
+                            else:
+                                ax2.set_ylabel("Overlap Parameters", size=title_size)
+                        
+                        # Color the y-axis tick labels to match their data
+                        ax1.tick_params(axis='y', labelcolor='black')
+                        ax2.tick_params(axis='y', labelcolor='black')
+                    else:
+                        ax1.set_title(f"Fundamental Frequencies - Box {box}", fontsize=title_size)
+                        ax1.set_ylabel("Frequency (Hz)", size=title_size)
+                else:
+                    ax1.set_title(f"Fundamental Frequencies - Box {box}", fontsize=title_size)
+                    ax1.set_ylabel("Frequency (Hz)", size=title_size)
+                
+                ax1.set_xlabel("UTC Time", size=title_size)
+                
+            elif parameter == "both_l":
+                # Plot both l1 and l2 lengths on the same plot (left axis)
+                for param in ["l1", "l2"]:
+                    plot_parameter(param, original_timestamps, filtered_data, ax1, alpha=0.7, show_stats=False)
+                
+                # Create second y-axis for overlap parameters if specified
+                if overlap:
+                    ax2 = ax1.twinx()
+                    for overlap_param in overlap:
+                        plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
+                
+                # Set plot title and labels
+                if overlap:
+                    valid_overlap = [p for p in overlap if p in param_config]
+                    if valid_overlap:
+                        overlap_names = ", ".join([param_config[p]['label'] for p in valid_overlap])
+                        ax1.set_title(f"Lengths from Fundamental Frequencies with {overlap_names} - Box {box}", fontsize=title_size)
+                        
+                        # Set y-axis labels
+                        ax1.set_ylabel("Length (m)", size=title_size)
+                        
+                        # For right y-axis, use specific label for single parameter or generic for multiple
+                        if len(valid_overlap) == 1:
+                            # Single overlap parameter - use its specific label
+                            overlap_param = valid_overlap[0]
+                            ax2.set_ylabel(f"{param_config[overlap_param]['label']} ({param_config[overlap_param]['unit']})", size=title_size)
+                        else:
+                            # Multiple overlap parameters - check if units are the same
+                            overlap_units = [param_config[p]['unit'] for p in valid_overlap]
+                            if len(set(overlap_units)) == 1:
+                                ax2.set_ylabel(f"Value ({overlap_units[0]})", size=title_size)
+                            else:
+                                ax2.set_ylabel("Overlap Parameters", size=title_size)
+                        
+                        # Color the y-axis tick labels to match their data
+                        ax1.tick_params(axis='y', labelcolor='black')
+                        ax2.tick_params(axis='y', labelcolor='black')
+                    else:
+                        ax1.set_title(f"Lengths from Fundamental Frequencies - Box {box}", fontsize=title_size)
+                        ax1.set_ylabel("Length (m)", size=title_size)
+                else:
+                    ax1.set_title(f"Lengths from Fundamental Frequencies - Box {box}", fontsize=title_size)
+                    ax1.set_ylabel("Length (m)", size=title_size)
+                
+                ax1.set_xlabel("UTC Time", size=title_size)
+                
             else:
-                # Plot single parameter with error bars
-                config = param_config[parameter]
-                vals = filtered_data[:, config["val_col"]]
-                errs = filtered_data[:, config["err_col"]] if config["err_col"] != -1 else None
-                label = f"{config['label']} ({config['unit']})"
-                plt.errorbar(timestamps, vals, yerr=errs, fmt='o', capsize=5, label=label)
+                # Plot main parameter on left axis
+                main_vals, main_timestamps = plot_parameter(parameter, original_timestamps, filtered_data, ax1, alpha=1.0, show_stats=True)
+                
+                # Create second y-axis for overlap parameters if specified
+                if overlap:
+                    ax2 = ax1.twinx()
+                    for overlap_param in overlap:
+                        plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
                 
                 # Set plot title and labels
-                plt.title(f"Processed {config['label']} - Box {box}\n{start_date_str} to {end_date_str}")
-                plt.xlabel("UTC Time")
-                plt.ylabel(f"{config['label']} ({config['unit']})")
+                if overlap:
+                    # Filter out invalid overlap parameters
+                    valid_overlap = [p for p in overlap if p in param_config]
+                    if valid_overlap:
+                        overlap_names = ", ".join([param_config[p]['label'] for p in valid_overlap])
+                        ax1.set_title(f"Processed {param_config[parameter]['label']} with {overlap_names} - Box {box}", fontsize=title_size)
+                        
+                        # Set y-axis labels
+                        ax1.set_ylabel(f"{param_config[parameter]['label']} ({param_config[parameter]['unit']})", 
+                                      size=title_size)
+                        
+                        # For right y-axis, use specific label for single parameter or generic for multiple
+                        if len(valid_overlap) == 1:
+                            # Single overlap parameter - use its specific label
+                            overlap_param = valid_overlap[0]
+                            ax2.set_ylabel(f"{param_config[overlap_param]['label']} ({param_config[overlap_param]['unit']})", size=title_size)
+                        else:
+                            # Multiple overlap parameters - check if units are the same
+                            overlap_units = [param_config[p]['unit'] for p in valid_overlap]
+                            if len(set(overlap_units)) == 1:
+                                ax2.set_ylabel(f"Value ({overlap_units[0]})", size=title_size)
+                            else:
+                                ax2.set_ylabel("Overlap Parameters", size=title_size)
+                        
+                        # Color the y-axis labels to match their data
+                        ax1.tick_params(axis='y')
+                        ax2.tick_params(axis='y', labelcolor='black')
+                        
+                    else:
+                        ax1.set_title(f"Processed {param_config[parameter]['label']} - Box {box}", fontsize=title_size)
+                        ax1.set_ylabel(f"{param_config[parameter]['label']} ({param_config[parameter]['unit']})", size=title_size)
+                else:
+                    ax1.set_title(f"Processed {param_config[parameter]['label']} - Box {box}", fontsize=title_size)
+                    ax1.set_ylabel(f"{param_config[parameter]['label']} ({param_config[parameter]['unit']})", size=title_size)
+                
+                ax1.set_xlabel("UTC Time", size=title_size)
             
-            print("Mean value:", np.nanmean(vals))
-            print("std:", np.nanstd(vals))
-            
+            # Apply x and y limits
             if x_lim:   
                 x_lim_dt = []
                 for date_str in x_lim:
@@ -290,28 +580,50 @@ def peek_pdata(parameter, start_date_str, end_date_str, box_number=None, x_lim=F
                         x_lim_dt.append(datetime.datetime.strptime(date_str, "%Y%m%d"))
                     elif len(date_str) == 10:  # YYYYMMDDHH
                         x_lim_dt.append(datetime.datetime.strptime(date_str, "%Y%m%d%H"))
+                    elif len(date_str) == 12:  # YYYYMMDDHHMM
+                        x_lim_dt.append(datetime.datetime.strptime(date_str, "%Y%m%d%H%M"))
                     else:
-                        raise ValueError("x_lim dates must be YYYYMMDD or YYYYMMDDHH format")
-                plt.xlim(x_lim_dt)
+                        raise ValueError("x_lim dates must be YYYYMMDD, YYYYMMDDHH, or YYYYMMDDHHMM format")
+                ax1.set_xlim(x_lim_dt)
             
             if y_lim:
-                plt.ylim(y_lim)
+                ax1.set_ylim(y_lim)
+                
+            if overlap_y_lim and ax2 is not None:
+                ax2.set_ylim(overlap_y_lim)
             
-            plt.legend()
-            plt.xticks(rotation=45)
+            # Combine legends from both axes if we have overlap
+            if overlap and ax2 is not None:
+                lines1, labels1 = ax1.get_legend_handles_labels()
+                lines2, labels2 = ax2.get_legend_handles_labels()
+                ax1.legend(lines1 + lines2, labels1 + labels2, fontsize=15, loc='upper left')
+            else:
+                ax1.legend(fontsize=15, loc='best')
+            
+            ax1.grid()
+            ax1.tick_params(axis='x', rotation=45)
             plt.tight_layout()
             
-            # Save plot
-            plot_name = f"box_{box}_processed_{parameter}_with_errors.png" if parameter != "all" else f"box_{box}_processed_all.png"
+            # Save plot - include overlap info in filename if used
+            if overlap:
+                valid_overlap = [p for p in overlap if p in param_config]
+                overlap_str = "_with_" + "_".join(valid_overlap) if valid_overlap else ""
+                plot_name = f"box_{box}_processed_{parameter}{overlap_str}_dual_axis.png"
+            else:
+                plot_name = f"box_{box}_processed_{parameter}_with_errors.png"
+            
             plot_path = os.path.join(plot_dir, plot_name)
             plt.savefig(plot_path, bbox_inches='tight')
             plt.close()
-            print(f"Saved: {plot_path}")
+            print(f"[Box {box}] Saved: {plot_path}\n")
             
         except Exception as e:
             print(f"Error processing box {box}: {str(e)}")
-    
-def peek_motion_sum(start_date_str, end_date_str, box_number=None, x_lim=False, y_lim=False):
+            
+        except Exception as e:
+            print(f"Error processing box {box}: {str(e)}")
+            
+def peek_motion_sum(start_date_str, end_date_str, box_number=None, x_lim=False, y_lim=False, title_size=12):
     """
     Plots the sum of the acceleration data recorded in the motion bin file. This is a proxi for wind strength.
 
@@ -380,9 +692,9 @@ def peek_motion_sum(start_date_str, end_date_str, box_number=None, x_lim=False, 
                 linestyle="None",
                 label=f"Absolute Acceleration Sum"
             )
-            plt.title(f"Motion Absolute Sum – Box {box}\n{start_date_str} to {end_date_str}")
-            plt.xlabel("Timestamp")
-            plt.ylabel("Sum of Absolute Acceleration")
+            plt.title(f"Motion Amplitude of the Pole – Box {box}", fontsize=title_size)
+            plt.xlabel("UTC Time", size=title_size)
+            plt.ylabel("Motion Amplitude", size=title_size)
             
             print("Mean value:", np.nanmean(abs_sum_list))
             print("std:", np.nanstd(abs_sum_list))
@@ -401,7 +713,8 @@ def peek_motion_sum(start_date_str, end_date_str, box_number=None, x_lim=False, 
             if y_lim:
                 plt.ylim(y_lim)
             
-            plt.legend()
+            plt.legend(fontsize=20)
+            plt.grid()
             plt.xticks(rotation=45)
             plt.tight_layout()
             
@@ -414,22 +727,24 @@ def peek_motion_sum(start_date_str, end_date_str, box_number=None, x_lim=False, 
         except Exception as e:
             print(f"Error processing box {box}: {str(e)}")
 
-def peek_spectrum(time_str, sample_num=None, box_number=None, y_lim=False, x_lim=(0,50)):
+def peek_spectrum(time_str, sample_num=None, box_number=None, y_lim=False, x_lim=(0,100), title_size=12):
     """
-    Acceleration amplitude as a function of time as read from the motion bin file.
+    Acceleration amplitude as a function of time as read from the motion bin file, with peak identification.
 
     Parameters:
         time_str (str): Date in YYYYMMDDHH format. The data within a wake-up cycle that is closest
             to time_str will be plotted.
-        sample_num (int or None): If an integer, number of the sample you want to plot within a wake-up cycle (usually 1-10).
-            If None (default), plots every sample in the chosen wake-up cycle in separate plots.
+        sample_num (int or None): 
+            - If an integer (1-10), plots that specific sample
+            - If None, plots every sample in the chosen wake-up cycle in separate plots
+            - If -1, plots the sum of all spectra from the wake-up cycle
         box_number (int, optional): Specific box number to plot. If None, plots all boxes.
         y_lim (tuple (float, float), optional): Bottom and top limit of the y axis for the plot.
         x_lim (tuple (float, float), optional): Left and right limit of the x axis for the plot.
 
     Example use:
         peek_spectrum("2025051400", sample_num=3, box_number=8, y_lim=(0,200))
-        peek_spectrum("2025051412")
+        peek_spectrum("2025051500", sample_num=-1, title_size=24)
     """
     # Validate time_str
     if not (isinstance(time_str, str) and len(time_str) == 10 and time_str.isdigit()):
@@ -449,7 +764,7 @@ def peek_spectrum(time_str, sample_num=None, box_number=None, y_lim=False, x_lim
     # Extract the day portion for bounding the search
     day_str = time_str[:8]  # "YYYYMMDD"
 
-    # Build (or reuse) a directory for spectrum plots
+    # Build directory for spectrum plots
     plot_dir = os.path.join(script_directory, SPECTRUM_FOLDER)
     os.makedirs(plot_dir, exist_ok=True)
 
@@ -503,7 +818,115 @@ def peek_spectrum(time_str, sample_num=None, box_number=None, y_lim=False, x_lim
         # Extract only the samples at that exact epoch_time
         group = day_data[day_data["epoch_time"] == target_time]
         if group.shape[0] == 0:
-            print(f"[Box {box}] No samples at epoch_time={target_time} → skipping.")
+            print(f"[Box {box}] No samples at epoch_time={target_time} -> skipping.")
+            continue
+
+        # Format the chosen time for filenames
+        file_time_str = dt_chosen.strftime("%Y%m%d%H%M")
+        
+        # Handle special case for sample_num=-1 (sum of all spectra)
+        if sample_num == -1:
+            # Initialize an array to hold the summed magnitude spectrum
+            summed_mag = None
+            freqs = None
+            
+            # Compute FFT for each sample and sum the magnitudes
+            for i, rec in enumerate(group):
+                v = rec["vReal"]
+                fft_vals = np.fft.rfft(v)
+                mag = np.abs(fft_vals)
+                
+                if summed_mag is None:
+                    summed_mag = mag
+                    # Compute frequencies (only need to do this once)
+                    N = v.size
+                    fs = 200.0
+                    freqs = np.fft.rfftfreq(N, d=1.0 / fs)
+                else:
+                    summed_mag += mag
+            
+            # Create plot
+            plt.figure(figsize=(12, 6))
+            plt.grid()
+            plt.plot(freqs[2:], summed_mag[2:], linewidth=1, color="k")
+            
+            # Identify peaks
+            peaks_dict = identify_peaks(summed_mag, freqs)
+            
+            # Plot fundamental frequencies if found
+            if peaks_dict['fundamental1'] is not None and peaks_dict['fundamental1']['freq'] is not None:
+                idx = np.argmin(np.abs(freqs - peaks_dict['fundamental1']['freq']))
+                f1_freq = freqs[idx] # This is saved for the harmonics
+                plt.plot(freqs[idx], summed_mag[idx], 'ro', markersize=8, label='Fundamental 1')
+                plt.text(freqs[idx], summed_mag[idx], f"  $F_1$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='left')
+            
+            if peaks_dict['fundamental2'] is not None and peaks_dict['fundamental2']['freq'] is not None:
+                idx = np.argmin(np.abs(freqs - peaks_dict['fundamental2']['freq']))
+                f2_freq = freqs[idx] # This is saved for the harmonics
+                plt.plot(freqs[idx], summed_mag[idx], 'bo', markersize=8, label='Fundamental 2')
+                plt.text(freqs[idx], summed_mag[idx], f"  $F_2$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='left')
+            
+            # Plot harmonics if found
+            if peaks_dict['fundamental1'] is not None:
+                for h in peaks_dict['fundamental1']['harmonics']:
+                    idx = np.argmin(np.abs(freqs - h))
+                    plt.plot(freqs[idx], summed_mag[idx], 'rs', markersize=6, label='Harmonics of F1')
+                    which_harmonic = int(np.round(freqs[idx]/f1_freq))
+                    plt.text(freqs[idx], summed_mag[idx], f"  ${which_harmonic} F_1$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='left')
+            
+            if peaks_dict['fundamental2'] is not None:
+                for h in peaks_dict['fundamental2']['harmonics']:
+                    idx = np.argmin(np.abs(freqs - h))
+                    plt.plot(freqs[idx], summed_mag[idx], 'bs', markersize=6, label='Harmonics of F2')
+                    which_harmonic = int(np.round(freqs[idx]/f2_freq))
+                    plt.text(freqs[idx], summed_mag[idx], f"  ${which_harmonic} F_2$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='left')
+            
+            # Plot modulated peaks if found
+            if peaks_dict['fundamental2'] is not None:
+                for m in peaks_dict['fundamental2']['modulated']:
+                    idx = np.argmin(np.abs(freqs - m))
+                    plt.plot(freqs[idx], summed_mag[idx], 'g^', markersize=6, label='Modulated peaks')
+                    label = "M_+" if (freqs[idx] - f2_freq) > 0 else "M_-"
+                    offset = "left" if (freqs[idx] - f2_freq) > 0 else "right"
+                    plt.text(freqs[idx], summed_mag[idx], f"  ${label}$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha=offset)
+            
+            
+            # Plot other peaks if found
+            if 'other_peaks' in peaks_dict:
+                for op in peaks_dict['other_peaks']:
+                    idx = np.argmin(np.abs(freqs - op))
+                    plt.plot(freqs[idx], summed_mag[idx], 'kx', markersize=6, label='Other peaks')
+                    plt.text(freqs[idx], summed_mag[idx], f"  Other\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='left')
+            
+            
+            # Add legend if any peaks were found
+            if plt.gca().has_data():
+                handles, labels = plt.gca().get_legend_handles_labels()
+                by_label = dict(zip(labels, handles))  # Remove duplicate labels
+                plt.legend(by_label.values(), by_label.keys(), loc='best', fontsize=15)
+            
+            plt.title(
+                f"Motion Frequency Spectrum - Box {box} at {time_chosen_str} UTC"
+                #f"\nAll samples of wake #{chosen_wake_iter} (n={len(group)})"
+                , fontsize=title_size
+            )
+            plt.xlabel("Frequency (Hz)", size=title_size)
+            plt.xlim(x_lim)
+            plt.ylabel("Magnitude", size=title_size)
+            plt.tight_layout()
+            
+            if y_lim:
+                plt.ylim(y_lim)
+            else:
+                lim = plt.ylim()
+                plt.ylim((lim[0],lim[1]*1.1))
+
+            # Save the figure
+            out_fname = f"box_{box}_spectrum_sum_{file_time_str}.png"
+            out_path = os.path.join(plot_dir, out_fname)
+            plt.savefig(out_path)
+            plt.close()
+            print(f"[Box {box}] Saved: {out_path}")
             continue
 
         # Determine samples to plot
@@ -517,9 +940,6 @@ def peek_spectrum(time_str, sample_num=None, box_number=None, y_lim=False, x_lim
                 )
                 continue
             samples_to_plot = [sample_num]
-
-        # Format the chosen time for filenames
-        file_time_str = dt_chosen.strftime("%Y%m%d%H%M")
         
         for sample in samples_to_plot:
             rec = group[sample - 1]
@@ -534,22 +954,80 @@ def peek_spectrum(time_str, sample_num=None, box_number=None, y_lim=False, x_lim
 
             # Create plot for this sample
             plt.figure(figsize=(12, 6))
-            plt.plot(freqs, mag, linewidth=1)
+            plt.grid()
+            min_index =  np.argmin(freqs-MIN_FREQ)
+            plt.plot(freqs[min_index:], mag[min_index:], linewidth=1, color="k")
             
-            print("Mean value:", np.nanmean(mag))
-            print("std:", np.nanstd(mag))
+            # Identify peaks
+            peaks_dict = identify_peaks(mag, freqs)
+            print("Peaks:", peaks_dict)
+            
+            # Plot fundamental frequencies if found
+            if peaks_dict['fundamental1'] is not None and peaks_dict['fundamental1']['freq'] is not None:
+                idx = np.argmin(np.abs(freqs - peaks_dict['fundamental1']['freq']))
+                f1_freq = freqs[idx] # This is saved for the harmonics
+                plt.plot(freqs[idx], mag[idx], 'ro', markersize=8, label='Fundamental 1')
+                plt.text(freqs[idx], mag[idx], f"  $F_1$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='center')
+            
+            if peaks_dict['fundamental2'] is not None and peaks_dict['fundamental2']['freq'] is not None:
+                idx = np.argmin(np.abs(freqs - peaks_dict['fundamental2']['freq']))
+                f2_freq = freqs[idx] # This is saved for the harmonics
+                plt.plot(freqs[idx], mag[idx], 'bo', markersize=8, label='Fundamental 2')
+                plt.text(freqs[idx], mag[idx], f"  $F_2$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='center')
+            
+            # Plot harmonics if found
+            if peaks_dict['fundamental1'] is not None:
+                for h in peaks_dict['fundamental1']['harmonics']:
+                    idx = np.argmin(np.abs(freqs - h))
+                    plt.plot(freqs[idx], mag[idx], 'rs', markersize=6, label='Harmonics of F1')
+                    which_harmonic = int(np.round(freqs[idx]/f1_freq))
+                    plt.text(freqs[idx], mag[idx], f"  ${which_harmonic} F_1$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='center')
+            
+            if peaks_dict['fundamental2'] is not None:
+                for h in peaks_dict['fundamental2']['harmonics']:
+                    idx = np.argmin(np.abs(freqs - h))
+                    plt.plot(freqs[idx], mag[idx], 'bs', markersize=6, label='Harmonics of F2')
+                    which_harmonic = int(np.round(freqs[idx]/f2_freq))
+                    plt.text(freqs[idx], mag[idx], f"  ${which_harmonic} F_2$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='center')
+            
+            # Plot modulated peaks if found
+            if peaks_dict['fundamental2'] is not None:
+                for m in peaks_dict['fundamental2']['modulated']:
+                    idx = np.argmin(np.abs(freqs - m))
+                    plt.plot(freqs[idx], mag[idx], 'g^', markersize=6, label='Modulated peaks')
+                    label = "M_+" if (freqs[idx] - f2_freq) > 0 else "M_-"
+                    offset = "left" if (freqs[idx] - f2_freq) > 0 else "right"
+                    plt.text(freqs[idx], mag[idx], f"  ${label}$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha=offset)
+            
+            
+            # Plot other peaks if found
+            if 'other_peaks' in peaks_dict:
+                for op in peaks_dict['other_peaks']:
+                    idx = np.argmin(np.abs(freqs - op))
+                    plt.plot(freqs[idx], mag[idx], 'kx', markersize=6, label='Other peaks')
+                    plt.text(freqs[idx], mag[idx], f"  Other\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='center')
+            
+            # Add legend if any peaks were found
+            if plt.gca().has_data():
+                handles, labels = plt.gca().get_legend_handles_labels()
+                by_label = dict(zip(labels, handles))  # Remove duplicate labels
+                plt.legend(by_label.values(), by_label.keys(), loc='best', fontsize=15)
             
             plt.title(
-                f"Spectrum - Box {box} @ {time_chosen_str} UTC\n"
-                f"Sample #{sample} of wake #{chosen_wake_iter}"
+                f"Motion Frequency Spectrum - Box {box} at {time_chosen_str} UTC\n"
+                #f"Sample #{sample} of wake #{chosen_wake_iter}"
+                , fontsize=title_size
             )
-            plt.xlabel("Frequency (Hz)")
+            plt.xlabel("Frequency (Hz)", size=title_size)
             plt.xlim(x_lim)
-            plt.ylabel("Magnitude")
+            plt.ylabel("Magnitude", size=title_size)
             plt.tight_layout()
             
             if y_lim:
                 plt.ylim(y_lim)
+            else:
+                lim = plt.ylim()
+                plt.ylim((lim[0],lim[1]*1.1))
 
             # Save the figure
             out_fname = f"box_{box}_spectrum_{file_time_str}_sample{sample}.png"
@@ -558,7 +1036,7 @@ def peek_spectrum(time_str, sample_num=None, box_number=None, y_lim=False, x_lim
             plt.close()
             print(f"[Box {box}] Saved: {out_path}")
 
-def peek_acc(time_str, sample_num=None, box_number=None, y_lim=False):
+def peek_acc(time_str, sample_num=None, box_number=None, y_lim=False, title_size=12):
     """
     Plots raw acceleration data as a function of time from the motion bin file.
 
@@ -672,17 +1150,19 @@ def peek_acc(time_str, sample_num=None, box_number=None, y_lim=False):
             time_array = np.arange(len(v)) / 200.0  # Time in seconds
             
             plt.figure(figsize=(12, 6))
+            plt.grid()
             plt.plot(time_array, v, linewidth=1)
             
             print("Mean value:", np.nanmean(v))
             print("std:", np.nanstd(v))
             
             plt.title(
-                f"Acceleration - Box {box} @ {time_chosen_str} UTC\n"
+                f"Acceleration Amplitude as a Function of Time at {time_chosen_str} UTC - Box {box}\n"
                 f"Sample #{sample} of wake #{chosen_wake_iter}"
+                , fontsize=title_size
             )
-            plt.xlabel("Time (seconds)")
-            plt.ylabel("Acceleration (g)")
+            plt.xlabel("Time (seconds)", size=title_size)
+            plt.ylabel("Acceleration Amplitude", size=title_size)
             plt.tight_layout()
             
             if y_lim:
@@ -712,7 +1192,191 @@ def peek_acc(time_str, sample_num=None, box_number=None, y_lim=False):
 
 
 
+def peek_spectrum_glued(time_str, box_number=None, y_lim=False, x_lim=(0,100), title_size=12):
+    """
+    Acceleration amplitude spectrum from concatenated motion data in a wake-up cycle.
 
+    Parameters:
+        time_str (str): Date in YYYYMMDDHH format. The data within a wake-up cycle that is closest
+            to time_str will be plotted.
+        box_number (int, optional): Specific box number to plot. If None, plots all boxes.
+        y_lim (tuple (float, float), optional): Bottom and top limit of the y axis for the plot.
+        x_lim (tuple (float, float), optional): Left and right limit of the x axis for the plot.
+
+    Example use:
+        peek_spectrum_glued("2025051400", box_number=8, y_lim=(0,200))
+    """
+    # Validate time_str
+    if not (isinstance(time_str, str) and len(time_str) == 10 and time_str.isdigit()):
+        print(f"ERROR: time_str must be a 10-digit string 'YYYYMMDDHH'; got '{time_str}'.")
+        return
+
+    # Parse the requested hour as UTC
+    try:
+        dt_req = datetime.datetime.strptime(time_str, "%Y%m%d%H")
+    except ValueError:
+        print(f"ERROR: Could not parse '{time_str}' as YYYYMMDDHH.")
+        return
+
+    # Convert to Unix timestamp (UTC, minutes & seconds = 0)
+    desired_ts = int(dt_req.replace(tzinfo=datetime.timezone.utc).timestamp())
+
+    # Extract the day portion for bounding the search
+    day_str = time_str[:8]  # "YYYYMMDD"
+
+    # Build directory for spectrum plots
+    plot_dir = os.path.join(script_directory, SPECTRUM_FOLDER)
+    os.makedirs(plot_dir, exist_ok=True)
+
+    # Convert the single-day string into UTC-based Unix-timestamp bounds
+    start_ts, end_ts = get_unix_time_range(day_str, day_str)
+
+    # Decide which boxes to run through
+    boxes = [box_number] if (box_number is not None) else box_n
+
+    for box in boxes:
+        motion_file = UNIFIED_FOLDER + "/" + f"motion_{box}.bin"
+        if not os.path.exists(motion_file):
+            print(f"[Box {box}] Motion file not found → skipping.")
+            continue
+
+        # Load the entire .bin as a structured array
+        data_dtype = np.dtype([
+            ("epoch_time", np.int32),
+            ("vReal",     np.float32, (2048,))
+        ])
+        motion_data = np.fromfile(motion_file, dtype=data_dtype)
+
+        # Filter down to records whose epoch_time is on that day
+        mask = (motion_data["epoch_time"] >= start_ts) & (motion_data["epoch_time"] <= end_ts)
+        day_data = motion_data[mask]
+        if day_data.size == 0:
+            print(f"[Box {box}] No motion records on {day_str} → skipping.")
+            continue
+
+        # Find all unique epoch_time values (each is one wake-up time)
+        unique_times = np.unique(day_data["epoch_time"])
+        if unique_times.shape[0] == 0:
+            print(f"[Box {box}] No wake-up timestamps found on {day_str}.")
+            continue
+
+        # Find the closest wake-up time to desired_ts
+        diffs = np.abs(unique_times.astype(np.int64) - np.int64(desired_ts))
+        idx = int(np.argmin(diffs))   # 0-based index in unique_times
+        target_time = unique_times[idx]
+        chosen_wake_iter = idx + 1    # For user info (1-based)
+
+        # Inform the user which wake-up was chosen
+        dt_chosen = datetime.datetime.utcfromtimestamp(int(target_time))
+        time_chosen_str = dt_chosen.strftime("%Y-%m-%d %H:%M")
+        print(
+            f"[Box {box}] Requested {time_str[:4]}-{time_str[4:6]}-{time_str[6:8]} "
+            f"{time_str[8:10]}:00 UTC → closest wake-up at "
+            f"{time_chosen_str} UTC (wake #{chosen_wake_iter} of {unique_times.shape[0]})"
+        )
+
+        # Extract only the samples at that exact epoch_time
+        group = day_data[day_data["epoch_time"] == target_time]
+        if group.shape[0] == 0:
+            print(f"[Box {box}] No samples at epoch_time={target_time} -> skipping.")
+            continue
+
+        # Format the chosen time for filenames
+        file_time_str = dt_chosen.strftime("%Y%m%d%H%M")
+        
+        # Concatenate all samples into a single array
+        glued_data = np.concatenate([rec["vReal"] for rec in group])
+        n_samples = len(group)
+        total_points = len(glued_data)
+        
+        # Compute FFT for the glued data
+        N = glued_data.size
+        fs = 200.0  # Sampling frequency in Hz
+        fft_vals = np.fft.rfft(glued_data)
+        mag = np.abs(fft_vals)
+        freqs = np.fft.rfftfreq(N, d=1.0 / fs)
+        
+        # Create plot
+        plt.figure(figsize=(12, 6))
+        plt.grid()
+        plt.plot(freqs[2:], mag[2:], linewidth=1, color="k")
+        
+        # Identify peaks
+        peaks_dict = identify_peaks(mag, freqs)
+        
+        # Plot fundamental frequencies if found
+        if peaks_dict['fundamental1'] is not None and peaks_dict['fundamental1']['freq'] is not None:
+            idx = np.argmin(np.abs(freqs - peaks_dict['fundamental1']['freq']))
+            f1_freq = freqs[idx]
+            plt.plot(freqs[idx], mag[idx], 'ro', markersize=8, label='Fundamental 1')
+            plt.text(freqs[idx], mag[idx], f"  $F_1$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='left')
+        
+        if peaks_dict['fundamental2'] is not None and peaks_dict['fundamental2']['freq'] is not None:
+            idx = np.argmin(np.abs(freqs - peaks_dict['fundamental2']['freq']))
+            f2_freq = freqs[idx]
+            plt.plot(freqs[idx], mag[idx], 'bo', markersize=8, label='Fundamental 2')
+            plt.text(freqs[idx], mag[idx], f"  $F_2$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='left')
+        
+        # Plot harmonics if found
+        if peaks_dict['fundamental1'] is not None:
+            for h in peaks_dict['fundamental1']['harmonics']:
+                idx = np.argmin(np.abs(freqs - h))
+                plt.plot(freqs[idx], mag[idx], 'rs', markersize=6, label='Harmonics of F1')
+                which_harmonic = int(np.round(freqs[idx]/f1_freq))
+                plt.text(freqs[idx], mag[idx], f"  ${which_harmonic} F_1$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='left')
+        
+        if peaks_dict['fundamental2'] is not None:
+            for h in peaks_dict['fundamental2']['harmonics']:
+                idx = np.argmin(np.abs(freqs - h))
+                plt.plot(freqs[idx], mag[idx], 'bs', markersize=6, label='Harmonics of F2')
+                which_harmonic = int(np.round(freqs[idx]/f2_freq))
+                plt.text(freqs[idx], mag[idx], f"  ${which_harmonic} F_2$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='left')
+        
+        # Plot modulated peaks if found
+        if peaks_dict['fundamental2'] is not None:
+            for m in peaks_dict['fundamental2']['modulated']:
+                idx = np.argmin(np.abs(freqs - m))
+                plt.plot(freqs[idx], mag[idx], 'g^', markersize=6, label='Modulated peaks')
+                label = "M_+" if (freqs[idx] - f2_freq) > 0 else "M_-"
+                offset = "left" if (freqs[idx] - f2_freq) > 0 else "right"
+                plt.text(freqs[idx], mag[idx], f"  ${label}$\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha=offset)
+        
+        # Plot other peaks if found
+        if 'other_peaks' in peaks_dict:
+            for op in peaks_dict['other_peaks']:
+                idx = np.argmin(np.abs(freqs - op))
+                plt.plot(freqs[idx], mag[idx], 'kx', markersize=6, label='Other peaks')
+                plt.text(freqs[idx], mag[idx], f"  Other\n${freqs[idx]:.2f}$ Hz\n", va='bottom', ha='left')
+        
+        # Add legend if any peaks were found
+        if plt.gca().has_data():
+            handles, labels = plt.gca().get_legend_handles_labels()
+            by_label = dict(zip(labels, handles))  # Remove duplicate labels
+            plt.legend(by_label.values(), by_label.keys(), loc='best', fontsize=15)
+        
+        plt.title(
+            f"Motion Frequency Spectrum (Glued Data) - Box {box} at {time_chosen_str} UTC\n"
+            f"Wake #{chosen_wake_iter} (n={n_samples}, {total_points} points)"
+            , fontsize=title_size
+        )
+        plt.xlabel("Frequency (Hz)", size=title_size)
+        plt.xlim(x_lim)
+        plt.ylabel("Magnitude", size=title_size)
+        plt.tight_layout()
+        
+        if y_lim:
+            plt.ylim(y_lim)
+        else:
+            lim = plt.ylim()
+            plt.ylim((lim[0], lim[1]*1.1))
+
+        # Save the figure
+        out_fname = f"box_{box}_spectrum_glued_{file_time_str}.png"
+        out_path = os.path.join(plot_dir, out_fname)
+        plt.savefig(out_path)
+        plt.show()
+        plt.close()
+        print(f"[Box {box}] Saved: {out_path}")
 
 
 
