@@ -12,6 +12,12 @@ analytical_freq_column = 1
 FEM_freq1_column = 2
 FEM_freq2_column = 3
 
+filename = 'freq_vs_length.csv'
+
+if not os.path.exists(filename):
+    print(f"{filename} not found. Creating it...")
+    make_f_file()
+
 # Load lookup table once using numpy
 _data = np.loadtxt('freq_vs_length.csv', delimiter=',', skiprows=1)
 _L_table = _data[:, length_column]       # column 0: L
