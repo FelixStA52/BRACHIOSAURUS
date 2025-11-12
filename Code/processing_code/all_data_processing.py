@@ -172,7 +172,7 @@ if data_processing:
             temp_offset = -5 #ºC
             
             data_temp_col = 3
-            temperature = np.mean(data[:,data_temp_col]) + temp_offset
+            temperature = np.mean(data[:,data_temp_col])
             if np.isnan(temperature):
                 print("Used default temperature for", time, "\n")
                 temperature = TEMP_GUESS[datetime.datetime.utcfromtimestamp(time).month - 1]
@@ -181,13 +181,19 @@ if data_processing:
             #len1, len2 = freq_to_len(filtered_f1, filtered_f2, r_outer=R_O, r_inner=R_I, young=69e9, rho=DENSITY, m_tip=MASS)
      
             # Add L1 and L2 values to final_data
-            if np.shape(len1)[0] > 0:
+            if np.shape(len1)[0] > 0 and np.nanmean(len1) != 0:
                 final_data[final_data[:,time_col]==time,l1_col] = np.nanmean(len1)
                 final_data[final_data[:,time_col]==time,l1_err_col] = np.nanstd(len1)/np.sqrt(np.shape(len1)[0])
+            else:
+                final_data[final_data[:,time_col]==time,l1_col] = np.nan
+                final_data[final_data[:,time_col]==time,l1_err_col] = np.nan
                 
-            if np.shape(len2)[0] > 0:
+            if np.shape(len2)[0] > 0 and np.nanmean(len2) != 0:
                 final_data[final_data[:,time_col]==time,l2_col] = np.nanmean(len2)
                 final_data[final_data[:,time_col]==time,l2_err_col] = np.nanstd(len2)/np.sqrt(np.shape(len2)[0])
+            else:
+                final_data[final_data[:,time_col]==time,l2_col] = np.nan
+                final_data[final_data[:,time_col]==time,l2_err_col] = np.nan
             
             filtered_all_len = vote_select(np.append(len1,len2))
             all_comp = np.mean(filtered_all_len)

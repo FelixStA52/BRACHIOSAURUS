@@ -7,12 +7,12 @@ import numpy as np
 IGNORE_RUNTIME_WARNINGS = True
 PROCESSING = True
 SECOND_PEAK = True
-DIR = "/Users/felix/Documents/McGill_Bsc/Radio Lab/singing poles/2025_05_mars_data"
+DIR = "/Users/felix/Documents/McGill_Bsc/Radio Lab/singing poles/Glacier stake data"
 
 # physical constants of the pole for theoretical approximations
 YOUNG = 69e9 # young modulus of the pole in GPa
-R_O = 0.01584#0.015875#1.277/100 # outer radius of the pole in m
-R_I = 0.012785#0.0128#1.021/100 # inner radius of the pole in m
+R_O = 0.015875#0.01584#0.015875#1.277/100 # outer radius of the pole in m
+R_I = 0.0128#0.012785#0.0128#1.021/100 # inner radius of the pole in m
 DENSITY = 2700 # density of the pole in kg/m^3
 MASS = 0.677 # mass of the BRACHIOSAURUS in kg
 
@@ -29,7 +29,7 @@ TIP_WIDTH_Y = 0.12    # Lateral dimension
 ECCENTRICITY = R_O + TIP_HEIGHT_Z/2  # outer radius + half box height
 
 # Moment of inertia about box's own center (for bending about y-axis)  
-I_box_center = MASS * (TIP_LENGTH_X**2 + TIP_WIDTH_Y**2) / 12
+I_box_center = MASS * (TIP_LENGTH_X**2 + TIP_HEIGHT_Z**2) / 12
 
 # Total moment of inertia about pole centerline (parallel axis theorem)
 I_T = I_box_center + MASS * ECCENTRICITY**2
@@ -85,7 +85,7 @@ c = 0 # the damping factor as found from calibrating the pole
 UNIFIED_FOLDER = "unified_data"
 PROCESSED_FOLDER = "processed_data"
 RAW_DATA_PLOTS_FOLDER = "raw_data_plots"
-PROCESSED_DATA_PLOTS_FOLDER = 'LAURA_pole'#"processed_data_plots"
+PROCESSED_DATA_PLOTS_FOLDER = "processed_data_plots"
 MOTION_AMP_FOLDER = "motion_amplitude_plots"
 SPECTRUM_FOLDER = "motion_spectrum_plots"
 ACCELERATION_FOLDER = "motion_acceleration_plots"

@@ -303,11 +303,11 @@ def peek_pdata(parameter, start_date_str, end_date_str, box_number=None, x_lim=F
             fig, ax1 = plt.subplots(figsize=(12, 6))
             ax2 = None  # Initialize ax2 as None at the top level
             
-            # Function to plot a single parameter
-            def plot_parameter(param_name, timestamps, data, axis, alpha=1.0, show_stats=True):
+            # Function to plot a parameter and return statistics
+            def plot_parameter(param_name, timestamps, data, axis, alpha=1.0, show_stats=False):
                 if param_name not in param_config:
                     print(f"Warning: Unknown parameter '{param_name}' in overlap list")
-                    return None, None
+                    return None, None, None
                     
                 config = param_config[param_name]
                 vals = data[:, config["val_col"]].copy()
@@ -334,22 +334,41 @@ def peek_pdata(parameter, start_date_str, end_date_str, box_number=None, x_lim=F
                 axis.errorbar(param_timestamps, vals, yerr=errs, fmt='o', 
                            color=config['color'], capsize=5, label=label, alpha=alpha)
                 
-                if show_stats:
-                    print(f"[Box {box}] {param_name} - Mean value: {np.nanmean(vals):.4f}")
-                    print(f"[Box {box}] {param_name} - Std: {np.nanstd(vals):.4f}")
+                # Calculate statistics
+                mean_val = np.nanmean(vals)
+                std_val = np.nanstd(vals)
+                n_valid = np.sum(~np.isnan(vals))
+                err_on_mean = std_val / np.sqrt(n_valid) if n_valid > 0 else np.nan
                 
-                return vals, param_timestamps
+                stats = {
+                    'mean': mean_val,
+                    'std': std_val,
+                    'err_on_mean': err_on_mean,
+                    'n_points': n_valid
+                }
+                
+                if show_stats:
+                    print(f"[Box {box}] {param_name} - Mean: {mean_val:.4f}, Std: {std_val:.4f}, Error on mean: {err_on_mean:.4f}, N: {n_valid}")
+                
+                return vals, param_timestamps, stats
+            
+            # Dictionary to store all statistics for printing
+            all_stats = {}
             
             if parameter == "all":
                 # Plot data, motion, and depth on the same plot (left axis)
                 for param in ["depth", "motion", "data"]:
-                    plot_parameter(param, original_timestamps, filtered_data, ax1, alpha=0.7, show_stats=False)
+                    vals, timestamps, stats = plot_parameter(param, original_timestamps, filtered_data, ax1, alpha=0.7, show_stats=False)
+                    if stats is not None:
+                        all_stats[param] = stats
                 
                 # Create second y-axis for overlap parameters if specified
                 if overlap:
                     ax2 = ax1.twinx()
                     for overlap_param in overlap:
-                        plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
+                        vals, timestamps, stats = plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
+                        if stats is not None:
+                            all_stats[overlap_param] = stats
                 
                 # Set plot title and labels
                 if overlap:
@@ -389,20 +408,24 @@ def peek_pdata(parameter, start_date_str, end_date_str, box_number=None, x_lim=F
             elif parameter == "full":
                 # Plot motion and depth on the same plot (left axis)
                 for param in ["depth", "motion"]:
-                    plot_parameter(param, original_timestamps, filtered_data, ax1, alpha=0.7, show_stats=False)
+                    vals, timestamps, stats = plot_parameter(param, original_timestamps, filtered_data, ax1, alpha=0.7, show_stats=False)
+                    if stats is not None:
+                        all_stats[param] = stats
                 
                 # Create second y-axis for overlap parameters if specified
                 if overlap:
                     ax2 = ax1.twinx()
                     for overlap_param in overlap:
-                        plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
+                        vals, timestamps, stats = plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
+                        if stats is not None:
+                            all_stats[overlap_param] = stats
                 
                 # Set plot title and labels
                 if overlap:
                     valid_overlap = [p for p in overlap if p in param_config]
                     if valid_overlap:
                         overlap_names = ", ".join([param_config[p]['label'] for p in valid_overlap])
-                        ax1.set_title(f"Motion and Depth Measurements with {overlap_names} - Box {box}", fontsize=title_size)
+                        ax1.set_title(f"Computed Length and Depth Sensor Measurements\nwith {overlap_names} - Box {box}", fontsize=title_size)
                         
                         # Set y-axis labels
                         ax1.set_ylabel("Length (m)", size=title_size)
@@ -435,13 +458,17 @@ def peek_pdata(parameter, start_date_str, end_date_str, box_number=None, x_lim=F
             elif parameter == "both_f":
                 # Plot both f1 and f2 frequencies on the same plot (left axis)
                 for param in ["f1", "f2"]:
-                    plot_parameter(param, original_timestamps, filtered_data, ax1, alpha=0.7, show_stats=False)
+                    vals, timestamps, stats = plot_parameter(param, original_timestamps, filtered_data, ax1, alpha=0.7, show_stats=False)
+                    if stats is not None:
+                        all_stats[param] = stats
                 
                 # Create second y-axis for overlap parameters if specified
                 if overlap:
                     ax2 = ax1.twinx()
                     for overlap_param in overlap:
-                        plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
+                        vals, timestamps, stats = plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
+                        if stats is not None:
+                            all_stats[overlap_param] = stats
                 
                 # Set plot title and labels
                 if overlap:
@@ -481,13 +508,17 @@ def peek_pdata(parameter, start_date_str, end_date_str, box_number=None, x_lim=F
             elif parameter == "both_l":
                 # Plot both l1 and l2 lengths on the same plot (left axis)
                 for param in ["l1", "l2"]:
-                    plot_parameter(param, original_timestamps, filtered_data, ax1, alpha=0.7, show_stats=False)
+                    vals, timestamps, stats = plot_parameter(param, original_timestamps, filtered_data, ax1, alpha=0.7, show_stats=False)
+                    if stats is not None:
+                        all_stats[param] = stats
                 
                 # Create second y-axis for overlap parameters if specified
                 if overlap:
                     ax2 = ax1.twinx()
                     for overlap_param in overlap:
-                        plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
+                        vals, timestamps, stats = plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
+                        if stats is not None:
+                            all_stats[overlap_param] = stats
                 
                 # Set plot title and labels
                 if overlap:
@@ -526,13 +557,17 @@ def peek_pdata(parameter, start_date_str, end_date_str, box_number=None, x_lim=F
                 
             else:
                 # Plot main parameter on left axis
-                main_vals, main_timestamps = plot_parameter(parameter, original_timestamps, filtered_data, ax1, alpha=1.0, show_stats=True)
+                main_vals, main_timestamps, main_stats = plot_parameter(parameter, original_timestamps, filtered_data, ax1, alpha=1.0, show_stats=True)
+                if main_stats is not None:
+                    all_stats[parameter] = main_stats
                 
                 # Create second y-axis for overlap parameters if specified
                 if overlap:
                     ax2 = ax1.twinx()
                     for overlap_param in overlap:
-                        plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
+                        vals, timestamps, stats = plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4, show_stats=False)
+                        if stats is not None:
+                            all_stats[overlap_param] = stats
                 
                 # Set plot title and labels
                 if overlap:
@@ -571,6 +606,15 @@ def peek_pdata(parameter, start_date_str, end_date_str, box_number=None, x_lim=F
                     ax1.set_ylabel(f"{param_config[parameter]['label']} ({param_config[parameter]['unit']})", size=title_size)
                 
                 ax1.set_xlabel("UTC Time", size=title_size)
+            
+            # Print statistics for all parameters
+            print(f"\n[Box {box}] Statistics Summary:")
+            print("-" * 110)
+            for param_name, stats in all_stats.items():
+                param_label = param_config[param_name]['label']
+                param_unit = param_config[param_name]['unit']
+                print(f"{param_label:30s} | Mean: {stats['mean']:8.4f} {param_unit:3s} | Std: {stats['std']:8.4f} {param_unit:3s} | Error on mean: {stats['err_on_mean']:8.4f} {param_unit:3s} | N: {stats['n_points']:4d}")
+            print("-" * 110)
             
             # Apply x and y limits
             if x_lim:   
@@ -1379,7 +1423,451 @@ def peek_spectrum_glued(time_str, box_number=None, y_lim=False, x_lim=(0,100), t
         print(f"[Box {box}] Saved: {out_path}")
 
 
+from matplotlib.patches import ConnectionPatch
 
+def peek_zoom(parameter, start_date_str, end_date_str, x1, y1, x2, y2, box_number=None, 
+              x_lim=False, y_lim=False, title_size=12, overlap=None, overlap_y_lim=False, param_zoom=None):
+    """
+    Plots processed data with a zoomed inset window showing detail of a selected region.
+
+    Parameters:
+        parameter (str): The parameter to plot in the main window. Options: 'temp', 'motion', 'data', 'depth', 
+            'f1', 'f2', 'both_f', 'l1', 'l2', 'both_l', 'full', or 'all'.
+        start_date_str (str): Start date in YYYYMMDD, YYYYMMDDHH, or YYYYMMDDHHMM format.
+        end_date_str (str): End date in YYYYMMDD, YYYYMMDDHH, or YYYYMMDDHHMM format.
+        x1 (str): Left x-limit of zoom window in YYYYMMDD, YYYYMMDDHH, or YYYYMMDDHHMM format.
+        y1 (float): Bottom y-limit of zoom window.
+        x2 (str): Right x-limit of zoom window in YYYYMMDD, YYYYMMDDHH, or YYYYMMDDHHMM format.
+        y2 (float): Top y-limit of zoom window.
+        box_number (int, optional): Specific box number to plot. If None, plots all boxes.
+        x_lim (tuple (str, str), optional): Left and right limit of main plot x axis.
+        y_lim (tuple (float, float), optional): Bottom and top limit of main plot y axis.
+        overlap (list, optional): List of additional parameters to overlay on main plot.
+        overlap_y_lim (tuple (float, float), optional): Bottom and top limit of right y axis.
+        param_zoom (str, optional): Parameter to plot in zoom window. If None, uses same as main parameter.
+        
+    Example use:
+        peek_zoom("full", "2025051412", "2025052103", "20250517", 1.98, "20250519", 2.03,
+                  overlap=['temp'], overlap_y_lim=(-20,20), param_zoom="both_l", title_size=20)
+        peek_zoom("motion", "20250505", "20250525", "20250510", 0.85, "20250515", 0.95, 
+                  box_number=8, y_lim=(0.8,1.0))
+        peek_zoom("temp", "20250505", "20250525", "20250510", -5, "20250515", 5,
+                  overlap=['motion'], overlap_y_lim=(0.8,1.2))
+        peek_zoom("full", "20250505", "20250525", "20250510", 10, "20250515", 30,
+                  param_zoom="both_f", box_number=8)
+    """
+    # Parameter configuration (same as peek_pdata)
+    param_config = {
+        "temp": {"val_col": 1, "err_col": -1, "label": "Temperature", "unit": "°C", "color": "purple"},
+        "motion": {"val_col": 2, "err_col": 3, "label": "Computed Length", "unit": "m", "color": "deepskyblue"},
+        "data": {"val_col": 4, "err_col": 5, "label": "Microcontroller Analysis Length", "unit": "m", "color": "royalblue"},
+        "depth": {"val_col": 6, "err_col": 7, "label": "Depth Sensor Length", "unit": "m", "color": "blue"},
+        "f1": {"val_col": 8, "err_col": 9, "label": "Fundamental Frequency 1", "unit": "Hz", "color": "red"},
+        "f2": {"val_col": 10, "err_col": 11, "label": "Fundamental Frequency 2", "unit": "Hz", "color": "orange"},
+        "l1": {"val_col": 12, "err_col": 13, "label": "Length from F1", "unit": "m", "color": "dodgerblue"},
+        "l2": {"val_col": 14, "err_col": 15, "label": "Length from F2", "unit": "m", "color": "fuchsia"}
+    }
+
+    # Validate parameter
+    valid_parameters = ["temp", "motion", "data", "depth", "f1", "f2", "both_f", "l1", "l2", "both_l", "all", "full"]
+    if parameter not in valid_parameters:
+        raise ValueError(f"Invalid parameter. Use: {', '.join(valid_parameters)}")
+    
+    # Set zoom parameter to main parameter if not specified
+    if param_zoom is None:
+        param_zoom = parameter
+    
+    # Validate zoom parameter
+    if param_zoom not in valid_parameters:
+        raise ValueError(f"Invalid param_zoom. Use: {', '.join(valid_parameters)}")
+
+    # Create plots directory
+    plot_dir = os.path.join(script_directory, PROCESSED_DATA_PLOTS_FOLDER)
+    os.makedirs(plot_dir, exist_ok=True)
+    
+    # Convert zoom window dates to datetime
+    def parse_date_str(date_str):
+        if len(date_str) == 8:  # YYYYMMDD
+            return datetime.datetime.strptime(date_str, "%Y%m%d")
+        elif len(date_str) == 10:  # YYYYMMDDHH
+            return datetime.datetime.strptime(date_str, "%Y%m%d%H")
+        elif len(date_str) == 12:  # YYYYMMDDHHMM
+            return datetime.datetime.strptime(date_str, "%Y%m%d%H%M")
+        else:
+            raise ValueError("Date must be YYYYMMDD, YYYYMMDDHH, or YYYYMMDDHHMM format")
+    
+    zoom_x1_dt = parse_date_str(x1)
+    zoom_x2_dt = parse_date_str(x2)
+    
+    # Get Unix timestamp range
+    start_ts_unix, end_ts_unix = get_unix_time_range(start_date_str, end_date_str)
+    start_int = int(unix_to_yyyymmddhhmm(start_ts_unix))
+    end_int = int(unix_to_yyyymmddhhmm(end_ts_unix))
+    
+    # Determine boxes to process
+    boxes = [box_number] if box_number is not None else box_n
+    
+    for box in boxes:
+        processed_file = PROCESSED_FOLDER + "/" + f'processed_data_{box}.csv'
+        if not os.path.exists(processed_file):
+            print(f"Processed data file for box {box} not found")
+            continue
+            
+        try:
+            # Load and filter data
+            processed_data = np.genfromtxt(processed_file, delimiter=',', skip_header=1)
+            
+            if processed_data.ndim == 1:
+                processed_data = processed_data.reshape(1, -1)
+
+            data_timestamps = processed_data[:, 0].astype(np.int64)
+            time_mask = (data_timestamps >= start_int) & (data_timestamps <= end_int)
+            filtered_data = processed_data[time_mask]
+            
+            if len(filtered_data) == 0:
+                print(f"No data for box {box} in range")
+                continue
+                
+            # Convert timestamps to datetime
+            original_timestamps = [
+                datetime.datetime.strptime(str(int(ts)), "%Y%m%d%H%M")
+                for ts in filtered_data[:, 0]
+            ]
+            
+            # Create figure with two subplots (zoom on top, main on bottom)
+            fig = plt.figure(figsize=(16, 10))
+            ax_zoom = plt.subplot2grid((2, 1), (0, 0))
+            ax_main = plt.subplot2grid((2, 1), (1, 0), rowspan=2)
+            ax2 = None
+            
+            # Helper function to plot parameter
+            def plot_parameter(param_name, timestamps, data, axis, alpha=1.0, show_stats=False):
+                if param_name not in param_config:
+                    print(f"Warning: Unknown parameter '{param_name}'")
+                    return None, None, None
+                    
+                config = param_config[param_name]
+                vals = data[:, config["val_col"]].copy()
+                errs = data[:, config["err_col"]].copy() if config["err_col"] != -1 else None
+                
+                param_timestamps = timestamps.copy()
+                
+                # Filter for frequency parameters
+                if param_name in ["f1", "f2"]:
+                    valid_mask = ~(np.isnan(vals) | (vals == 0))
+                    vals = vals[valid_mask]
+                    if errs is not None:
+                        errs = errs[valid_mask]
+                    param_timestamps = [param_timestamps[i] for i in range(len(param_timestamps)) if valid_mask[i]]
+                
+                # Filter large errors for length measurements
+                if param_name in ["motion", "data", "depth", "l1", "l2"] and errs is not None:
+                    large_err_mask = errs > 0.1
+                    vals[large_err_mask] = np.nan
+                    errs[large_err_mask] = np.nan
+                
+                label = f"{config['label']} ({config['unit']})"
+                axis.errorbar(param_timestamps, vals, yerr=errs, fmt='o', 
+                           color=config['color'], capsize=5, label=label, alpha=alpha)
+                
+                mean_val = np.nanmean(vals)
+                std_val = np.nanstd(vals)
+                n_valid = np.sum(~np.isnan(vals))
+                err_on_mean = std_val / np.sqrt(n_valid) if n_valid > 0 else np.nan
+                
+                stats = {
+                    'mean': mean_val,
+                    'std': std_val,
+                    'err_on_mean': err_on_mean,
+                    'n_points': n_valid
+                }
+                
+                if show_stats:
+                    print(f"[Box {box}] {param_name} - Mean: {mean_val:.4f}, Std: {std_val:.4f}, N: {n_valid}")
+                
+                return vals, param_timestamps, stats
+            
+            all_stats = {}
+            ax_zoom2 = None  # Initialize second y-axis for zoom
+            
+            # Plot zoom parameter in zoom window
+            if param_zoom in ["all", "full", "both_f", "both_l"]:
+                # Multi-parameter plots for zoom
+                if param_zoom == "all":
+                    params_zoom = ["depth", "motion", "data"]
+                    ylabel_zoom = "Length (m)"
+                elif param_zoom == "full":
+                    params_zoom = ["depth", "motion"]
+                    ylabel_zoom = "Length (m)"
+                elif param_zoom == "both_f":
+                    params_zoom = ["f1", "f2"]
+                    ylabel_zoom = "Frequency (Hz)"
+                else:  # both_l
+                    params_zoom = ["l1", "l2"]
+                    ylabel_zoom = "Length (m)"
+                
+                # Plot in zoom window
+                for param in params_zoom:
+                    plot_parameter(param, original_timestamps, filtered_data, ax_zoom, alpha=0.7)
+            else:
+                # Single parameter plot for zoom
+                plot_parameter(param_zoom, original_timestamps, filtered_data, ax_zoom, alpha=1.0)
+                ylabel_zoom = f"{param_config[param_zoom]['label']} ({param_config[param_zoom]['unit']})"
+            
+            # Add overlap parameters to zoom window
+            if overlap:
+                ax_zoom2 = ax_zoom.twinx()
+                for overlap_param in overlap:
+                    plot_parameter(overlap_param, original_timestamps, filtered_data, ax_zoom2, alpha=0.4)
+            
+            # Plot main parameter in main window
+            if parameter in ["all", "full", "both_f", "both_l"]:
+                # Multi-parameter plots
+                if parameter == "all":
+                    params_to_plot = ["depth", "motion", "data"]
+                    ylabel = "Length (m)"
+                elif parameter == "full":
+                    params_to_plot = ["depth", "motion"]
+                    ylabel = "Length (m)"
+                elif parameter == "both_f":
+                    params_to_plot = ["f1", "f2"]
+                    ylabel = "Frequency (Hz)"
+                else:  # both_l
+                    params_to_plot = ["l1", "l2"]
+                    ylabel = "Length (m)"
+                
+                # Plot in main window
+                for param in params_to_plot:
+                    vals, timestamps, stats = plot_parameter(param, original_timestamps, filtered_data, ax_main, alpha=0.7)
+                    if stats is not None:
+                        all_stats[param] = stats
+                        
+            else:
+                # Single parameter plot
+                # Plot in main window
+                main_vals, main_timestamps, main_stats = plot_parameter(parameter, original_timestamps, filtered_data, ax_main, alpha=1.0, show_stats=True)
+                if main_stats is not None:
+                    all_stats[parameter] = main_stats
+                
+                ylabel = f"{param_config[parameter]['label']} ({param_config[parameter]['unit']})"
+            
+            # Add overlap parameters to main plot only
+            if overlap:
+                ax2 = ax_main.twinx()
+                for overlap_param in overlap:
+                    vals, timestamps, stats = plot_parameter(overlap_param, original_timestamps, filtered_data, ax2, alpha=0.4)
+                    if stats is not None:
+                        all_stats[overlap_param] = stats
+            
+            # Set zoom window limits
+            ax_zoom.set_xlim(zoom_x1_dt, zoom_x2_dt)
+            ax_zoom.set_ylim(y1, y2)
+            ax_zoom.set_ylabel(ylabel_zoom, size=title_size)
+            ax_zoom.grid(True)
+            ax_zoom.tick_params(axis='x', rotation=45)
+            
+            # Set overlap y-limits for zoom if specified
+            if overlap_y_lim and ax_zoom2 is not None:
+                ax_zoom2.set_ylim(overlap_y_lim)
+            
+            # Set right y-axis label for zoom window if overlap exists
+            if overlap and ax_zoom2 is not None:
+                valid_overlap = [p for p in overlap if p in param_config]
+                if len(valid_overlap) == 1:
+                    overlap_param = valid_overlap[0]
+                    ax_zoom2.set_ylabel(f"{param_config[overlap_param]['label']} ({param_config[overlap_param]['unit']})", 
+                                       size=title_size-2)
+                else:
+                    overlap_units = [param_config[p]['unit'] for p in valid_overlap]
+                    if len(set(overlap_units)) == 1:
+                        ax_zoom2.set_ylabel(f"Value ({overlap_units[0]})", size=title_size-2)
+                    else:
+                        ax_zoom2.set_ylabel("Overlap Parameters", size=title_size-2)
+                ax_zoom2.tick_params(axis='y', labelcolor='black')
+            
+            # Set title for zoom window
+            if param_zoom in ["all", "full", "both_f", "both_l"]:
+                # Multi-parameter zoom titles
+                if param_zoom == "all":
+                    zoom_title_base = "Computed Length, Microcontroller Analysis Length, and Depth Sensor Length"
+                elif param_zoom == "full":
+                    zoom_title_base = "Computed Length and Depth Sensor Length"
+                elif param_zoom == "both_f":
+                    zoom_title_base = "Fundamental Frequency 1 and Fundamental Frequency 2"
+                else:  # both_l
+                    zoom_title_base = "Length from F1 and Length from F2"
+            else:
+                zoom_title_base = param_config[param_zoom]['label']
+            
+            if overlap:
+                valid_overlap = [p for p in overlap if p in param_config]
+                if valid_overlap:
+                    overlap_names = " and ".join([param_config[p]['label'] for p in valid_overlap])
+                    ax_zoom.set_title(f"Zoomed View: {zoom_title_base} with {overlap_names} - Box {box}", fontsize=title_size)
+                else:
+                    ax_zoom.set_title(f"Zoomed View: {zoom_title_base} - Box {box}", fontsize=title_size)
+            else:
+                ax_zoom.set_title(f"Zoomed View: {zoom_title_base} - Box {box}", fontsize=title_size)
+            
+            # Set main plot limits
+            if x_lim:
+                x_lim_dt = [parse_date_str(d) for d in x_lim]
+                ax_main.set_xlim(x_lim_dt)
+            
+            if y_lim:
+                ax_main.set_ylim(y_lim)
+                
+            if overlap_y_lim and ax2 is not None:
+                ax2.set_ylim(overlap_y_lim)
+            
+            # Labels for main plot
+            ax_main.set_xlabel("UTC Time", size=title_size)
+            ax_main.set_ylabel(ylabel if parameter not in ["all", "full", "both_f", "both_l"] else 
+                              ("Length (m)" if parameter in ["all", "full", "both_l"] else "Frequency (Hz)"), 
+                              size=title_size)
+            
+            # Set title for main plot
+            if parameter in ["all", "full", "both_f", "both_l"]:
+                # Multi-parameter main titles (matching peek_pdata style)
+                if parameter == "all":
+                    if overlap:
+                        valid_overlap = [p for p in overlap if p in param_config]
+                        if valid_overlap:
+                            overlap_names = " and ".join([param_config[p]['label'] for p in valid_overlap])
+                            ax_main.set_title(f"Lengths as Measured by BRACHIOSAURUS with {overlap_names} - Box {box}", fontsize=title_size)
+                        else:
+                            ax_main.set_title(f"Lengths as Measured by BRACHIOSAURUS Through Time - Box {box}", fontsize=title_size)
+                    else:
+                        ax_main.set_title(f"Lengths as Measured by BRACHIOSAURUS Through Time - Box {box}", fontsize=title_size)
+                elif parameter == "full":
+                    if overlap:
+                        valid_overlap = [p for p in overlap if p in param_config]
+                        if valid_overlap:
+                            overlap_names = " and ".join([param_config[p]['label'] for p in valid_overlap])
+                            ax_main.set_title(f"Computed Length and Depth Sensor Measurements\nwith {overlap_names} - Box {box}", fontsize=title_size)
+                        else:
+                            ax_main.set_title(f"Motion and Depth Measurements - Box {box}", fontsize=title_size)
+                    else:
+                        ax_main.set_title(f"Motion and Depth Measurements - Box {box}", fontsize=title_size)
+                elif parameter == "both_f":
+                    if overlap:
+                        valid_overlap = [p for p in overlap if p in param_config]
+                        if valid_overlap:
+                            overlap_names = " and ".join([param_config[p]['label'] for p in valid_overlap])
+                            ax_main.set_title(f"Fundamental Frequencies with {overlap_names} - Box {box}", fontsize=title_size)
+                        else:
+                            ax_main.set_title(f"Fundamental Frequencies - Box {box}", fontsize=title_size)
+                    else:
+                        ax_main.set_title(f"Fundamental Frequencies - Box {box}", fontsize=title_size)
+                else:  # both_l
+                    if overlap:
+                        valid_overlap = [p for p in overlap if p in param_config]
+                        if valid_overlap:
+                            overlap_names = " and ".join([param_config[p]['label'] for p in valid_overlap])
+                            ax_main.set_title(f"Lengths from Fundamental Frequencies with {overlap_names} - Box {box}", fontsize=title_size)
+                        else:
+                            ax_main.set_title(f"Lengths from Fundamental Frequencies - Box {box}", fontsize=title_size)
+                    else:
+                        ax_main.set_title(f"Lengths from Fundamental Frequencies - Box {box}", fontsize=title_size)
+            else:
+                # Single parameter titles
+                param_label = param_config[parameter]['label']
+                if overlap:
+                    valid_overlap = [p for p in overlap if p in param_config]
+                    if valid_overlap:
+                        overlap_names = " and ".join([param_config[p]['label'] for p in valid_overlap])
+                        ax_main.set_title(f"Processed {param_label} with {overlap_names} - Box {box}", fontsize=title_size)
+                    else:
+                        ax_main.set_title(f"Processed {param_label} - Box {box}", fontsize=title_size)
+                else:
+                    ax_main.set_title(f"Processed {param_label} - Box {box}", fontsize=title_size)
+            
+            if overlap and ax2 is not None:
+                valid_overlap = [p for p in overlap if p in param_config]
+                if len(valid_overlap) == 1:
+                    overlap_param = valid_overlap[0]
+                    ax2.set_ylabel(f"{param_config[overlap_param]['label']} ({param_config[overlap_param]['unit']})", 
+                                 size=title_size)
+                else:
+                    overlap_units = [param_config[p]['unit'] for p in valid_overlap]
+                    if len(set(overlap_units)) == 1:
+                        ax2.set_ylabel(f"Value ({overlap_units[0]})", size=title_size)
+                    else:
+                        ax2.set_ylabel("Overlap Parameters", size=title_size)
+            
+            ax_main.grid(True)
+            ax_main.tick_params(axis='x', rotation=45)
+            
+            # Draw rectangle on main plot showing zoom region AFTER plotting data
+            from matplotlib.patches import Rectangle
+            rect = Rectangle((zoom_x1_dt, y1), zoom_x2_dt - zoom_x1_dt, y2 - y1,
+                           linewidth=2, edgecolor='red', facecolor='none', linestyle='--', zorder=10)
+            ax_main.add_patch(rect)
+            
+            # Add connection patches from top corners of rectangle to bottom corners of zoom plot
+            # Get the y-axis limits to position connections at the top of the main plot
+            main_ylim = ax_main.get_ylim()
+            
+            # Connect from top-left corner of rectangle to bottom-left of zoom
+            con1 = ConnectionPatch(xyA=(zoom_x1_dt, y2), xyB=(zoom_x1_dt, y1), 
+                                  coordsA="data", coordsB="data",
+                                  axesA=ax_main, axesB=ax_zoom, 
+                                  color="red", linewidth=1.5, linestyle='--', zorder=10, alpha=0.6)
+            # Connect from top-right corner of rectangle to bottom-right of zoom
+            con2 = ConnectionPatch(xyA=(zoom_x2_dt, y2), xyB=(zoom_x2_dt, y1),
+                                  coordsA="data", coordsB="data",
+                                  axesA=ax_main, axesB=ax_zoom, 
+                                  color="red", linewidth=1.5, linestyle='--', zorder=10, alpha=0.6)
+            ax_main.add_artist(con1)
+            ax_main.add_artist(con2)
+            
+            # Legends
+            if overlap and ax2 is not None:
+                lines1, labels1 = ax_main.get_legend_handles_labels()
+                lines2, labels2 = ax2.get_legend_handles_labels()
+                ax_main.legend(lines1 + lines2, labels1 + labels2, fontsize=12, loc='upper left')
+            else:
+                ax_main.legend(fontsize=20, loc='best')
+            
+            # Zoom window legend
+            if overlap and ax_zoom2 is not None:
+                lines1_zoom, labels1_zoom = ax_zoom.get_legend_handles_labels()
+                lines2_zoom, labels2_zoom = ax_zoom2.get_legend_handles_labels()
+                ax_zoom.legend(lines1_zoom + lines2_zoom, labels1_zoom + labels2_zoom, fontsize=10, loc='upper left')
+            else:
+                ax_zoom.legend(fontsize=20, loc='best')
+            
+            ax_main.grid(True)
+            ax_main.tick_params(axis='x', rotation=45)
+            
+            # Print statistics
+            print(f"\n[Box {box}] Statistics Summary:")
+            print("-" * 110)
+            for param_name, stats in all_stats.items():
+                param_label = param_config[param_name]['label']
+                param_unit = param_config[param_name]['unit']
+                print(f"{param_label:30s} | Mean: {stats['mean']:8.4f} {param_unit:3s} | Std: {stats['std']:8.4f} {param_unit:3s} | N: {stats['n_points']:4d}")
+            print("-" * 110)
+            
+            # Save plot
+            if overlap:
+                valid_overlap = [p for p in overlap if p in param_config]
+                overlap_str = "_with_" + "_".join(valid_overlap) if valid_overlap else ""
+                zoom_str = f"_zoom{param_zoom}" if param_zoom != parameter else ""
+                plot_name = f"box_{box}_zoom_{parameter}{zoom_str}{overlap_str}.png"
+            else:
+                zoom_str = f"_zoom{param_zoom}" if param_zoom != parameter else ""
+                plot_name = f"box_{box}_zoom_{parameter}{zoom_str}.png"
+            
+            plt.tight_layout()
+            plot_path = os.path.join(plot_dir, plot_name)
+            plt.savefig(plot_path, bbox_inches='tight')
+            plt.close()
+            print(f"[Box {box}] Saved: {plot_path}\n")
+            
+        except Exception as e:
+            print(f"Error processing box {box}: {str(e)}")
+    
 
 
 
