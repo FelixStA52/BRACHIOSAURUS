@@ -1,0 +1,611 @@
+%% Copernicus Publications Manuscript Preparation Template for LaTeX Submissions
+%%
+%% This template should be used for copernicus.cls
+%% The class file and some style files are bundled in the Copernicus Latex Package, which can be downloaded from the different journal webpages.
+%% For further assistance please contact Copernicus Publications at: production@copernicus.org
+%% https://publications.copernicus.org/for_authors/manuscript_preparation.html
+
+
+%% Please use the following documentclass and journal abbreviations for preprints and final revised papers.
+
+%% 2-column papers and preprints
+\documentclass[journal abbreviation, manuscript]{copernicus}
+
+
+
+%% Journal abbreviations (please use the same for preprints and final revised papers)
+
+
+% Advances in Geosciences (adgeo)
+% Advances in Radio Science (ars)
+% Advances in Science and Research (asr)
+% Advances in Statistical Climatology, Meteorology and Oceanography (ascmo)
+% Aerosol Research (ar)
+% Annales Geophysicae (angeo)
+% Archives Animal Breeding (aab)
+% Atmospheric Chemistry and Physics (acp)
+% Atmospheric Measurement Techniques (amt)
+% Biogeosciences (bg)
+% Climate of the Past (cp)
+% DEUQUA Special Publications (deuquasp)
+% Earth Surface Dynamics (esurf)
+% Earth System Dynamics (esd)
+% Earth System Science Data (essd)
+% E&G Quaternary Science Journal (egqsj)
+% EGUsphere (egusphere) | This is only for EGUsphere preprints submitted without relation to an EGU journal.
+% European Journal of Mineralogy (ejm)
+% Fossil Record (fr)
+% Geochronology (gchron)
+% Geographica Helvetica (gh)
+% Geoscience Communication (gc)
+% Geoscientific Instrumentation, Methods and Data Systems (gi)
+% Geoscientific Model Development (gmd)
+% History of Geo- and Space Sciences (hgss)
+% Hydrology and Earth System Sciences (hess)
+% Journal of Bone and Joint Infection (jbji)
+% Journal of Micropalaeontology (jm)
+% Journal of Sensors and Sensor Systems (jsss)
+% Magnetic Resonance (mr)
+% Mechanical Sciences (ms)
+% Natural Hazards and Earth System Sciences (nhess)
+% Nonlinear Processes in Geophysics (npg)
+% Ocean Science (os)
+% Polarforschung - Journal of the German Society for Polar Research (polf)
+% Primate Biology (pb)
+% Proceedings of the International Association of Hydrological Sciences (piahs)
+% Safety of Nuclear Waste Disposal (sand)
+% Scientific Drilling (sd)
+% SOIL (soil)
+% Solid Earth (se)
+% State of the Planet (sp)
+% The Cryosphere (tc)
+% Weather and Climate Dynamics (wcd)
+% Web Ecology (we)
+% Wind Energy Science (wes)
+
+
+%% \usepackage commands included in the copernicus.cls:
+%\usepackage[german, english]{babel}
+%\usepackage{tabularx}
+%\usepackage{cancel}
+%\usepackage{multirow}
+%\usepackage{supertabular}
+%\usepackage{algorithmic}
+%\usepackage{algorithm}
+%\usepackage{amsthm}
+%\usepackage{float}
+%\usepackage{subfig}
+%\usepackage{rotating}
+
+
+\begin{document}
+
+\title{Creation of a low-cost ice melt monitoring system using wind-induced motion of mass-balance stakes}
+
+
+% \Author[affil]{given_name}{surname}
+
+\Author[][felix.st-amour@mail.mcgill.ca]{St-Amour}{Felix} %% correspondence author
+
+%\Author[]{}{}
+%\Author[]{}{}
+%HERE
+
+\affil[1]{Department of Physics, McGill University, Montreal, Canada}
+%\affil[]{ADDRESS}
+
+%% The [] brackets identify the author with the corresponding affiliation. 1, 2, 3, etc. should be inserted.
+
+%% If an author is deceased, please mark the respective author name(s) with a dagger, e.g. "\Author[2,$\dag$]{Anton}{Smith}", and add a further "\affil[$\dag$]{deceased, 1 July 2019}".
+
+%% If authors contributed equally, please mark the respective author names with an asterisk, e.g. "\Author[2,*]{Anton}{Smith}" and "\Author[3,*]{Bradley}{Miller}" and add a further affiliation: "\affil[*]{These authors contributed equally to this work.}".
+
+
+\runningtitle{TEXT}
+
+\runningauthor{TEXT}
+
+
+
+
+
+\received{}
+\pubdiscuss{} %% only important for two-stage journals
+\revised{}
+\accepted{}
+\published{}
+
+%% These dates will be inserted by Copernicus Publications during the typesetting process.
+
+
+\firstpage{1}
+
+\maketitle
+
+
+
+\begin{abstract}
+%Current methods for the measurement of the change in the height of ice of glaciers include expensive depth sensors and poles drilled into the ground, neither of which allow for both year-round and widespread measurements of glaciers. The Boxed Recorder Analyzing the Change in Height of Ice was developed to utilize the oscillatory motion of poles in the wind as a way to measure the height of poles placed on glaciers to centimeter precision. To this end, a formula for the frequency of oscillation of the pole as a function of the exposed pole length is derived. The creation of the boxed recorder is also detailed.
+
+Abstract
+
+%Abstract modified from the 2025 Eastern Snow Conference. It will be changed to something else once the paper is written in its entirety.
+
+%Current methods for monitoring glacier surface melt face numerous limitations. Ultrasonic depth sensors, while precise, are expensive, which limits their ability to be deployed across glaciers. Conversely, traditional methods using mass balance stakes enable localized measurements of cumulative melt but require manual readouts, preventing continuous, year-round data collection. The Boxed Recorder Analyzing the Change in Height of Ice (BRACHI) addresses these gaps by measuring wind-induced vibrations in glacier mass balance poles. As the progression of summer melt increases the exposed length of the pole, its natural sway frequency shifts. BRACHI detects these frequency changes via an accelerometer and microcontroller, converting them into centimeter-precision pole length measurements. BRACHI is built with simple, off-the-shelf electronics and runs for roughly 3+ years on 6 AA batteries, making it a practical cost-effective system for long-term, wide-area monitoring. Here, the prototype design of the BRACHI system, results from system testing and calibration activities, and preliminary field results from deployment of the BRACHI system on Axel Heiberg Island, NU, in spring 2025 are presented.
+
+\end{abstract}
+
+
+\copyrightstatement{TEXT} %% This section is optional and can be used for copyright transfers.
+
+
+\introduction  %% \introduction[modified heading if necessary]
+
+The melting of glaciers and ice caps ice sheets is responsible for 24\% of observed global sea level rise since YYYY, and continued contributions are project to persist through the 21st century. 
+
+Glaciers and ice caps, recognized indicators of a changing climate, have exhibited continued and often accelerated, mass loss through the early 21st century (e.g. Hugonnet et al., 2021) which holds notable downstream repercussions for sea level rise, as well as communities and ecosystems dependent on their runoff (Immerzeel et al., 2021). The glaciological mass balance method (e.g. Østrem and Brugman, 1966) is one approach used to quantify annual changes within a glacier system, using an input-output approach that interpolates and extrapolates measurements of mass gain (primarily snow accumulation) and mass loss (primarily ice melt and iceberg calving) across the glacier to gain a glacier-wide mass change commonly reported in meters of water equivalent (m w.e.) (Cogley et al., 2011). Point measurements of accumulation are made from measurements of snow thickness and density in snowpits, while ice melt is most commonly determined from measuring the exposure of poles (mass balance stakes) drilled into the ice. Measurements for mass balance are most generally made only once or twice per year, representing annual or seasonal summer and winter balances, respectively (Cogley et al., 2011). While this observation frequency is sufficient for standardized mass balance reporting, there is an increasing demand for higher temporal resolution data to support and improve mass balance projections and runoff models (World Glacier Monitoring Service, National Correspondents meeting, Nov. 2025). For most glacierized regions in the world, including the Canadian Arctic, ice melt is the dominant control on annual mass balance (Sharp et al., 2011). Therefore, continuous melt monitoring can serve as a valuable, real-time, indicator of mass balance conditions and can support timely runoff projections for downstream environments and communities.
+
+This study presents the development of instrumentation to support the continuous monitoring of localized mass balance conditions in a glacier ablation zone, using White Glacier on Umingmat Nunaat (Axel Heiberg Island, Nunavut) in the Canadian high-Arctic as a test site.
+
+
+While geodetic methods for measuring glacial mass balance have seen their availability increase and cost decrease over the past decades, commonly used glaciological methods have generally not wandered too far from 20th century techniques. These methods for measuring in-situ surface ablation suffer from not allowing widespread and continuous measurements at an affordable cost. Depth sensor systems allow for continuous and accurate measurements, but are limited in their numbers on glaciers due to their high cost. The more traditional method using mass balance stakes is itself limited by its need for manual readings, impeding time resolution for ablation measurements.
+
+This paper discusses the theoretical background of pole physics, the design of BRACHI, and the validation of the measurement technique in a controlled environment, as well as preliminary results from outdoor measurements.
+
+
+\section{Methods}
+
+\subsection{BRACHIOSAURUS design overview}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{ice_and_box.png}
+    \caption{The Boxed Recorder Analyzing the Change in Height of Ice (BRACHI) is an electronics box attached to the top of mass balance stakes. In \textbf{a)}, you can see mass balance stakes with BRACHI set on a lake on Axel Heiberg in May 2025. The bottom of each pole is solidly encased in ice. The poles are used for calibrations of the frequency as a function of lengths of the poles. From left to right, they are 1~m, 3~m, and 2~m long. In \textbf{b)}, you can see the electronics of BRACHI. The inside houses an accelerometer, depth sensor, temperature sensor, microcontroller,  micro-SD card, and AA battery holders set on a custom made printed circuit board (PCB). The data from the accelerometer is used to compute the length of the pole. The depth sensor is downward facing and measures the distance between itself and the ground.}
+    \label{fig:lake}
+\end{figure}
+
+BRACHI is a box of electronics that is attached to the top of a mass balance stake, as seen in Figure \ref{fig:lake} a). A readout module receives the data from an accelerometer, a temperature sensor, and a depth sensor, as seen in Figure \ref{fig:lake} b).
+The accelerometer measures the motion of the pole in the wind, which is directly correlated to the length of pole exposed above the ice. The temperature sensor is embedded within the accelerometer module. A depth sensor measures the distance from BRACHI at the top of the pole to the surface of the ice to cross-verify the measurements of the length of the pole from its motion.
+The design is inspired by \citet{stewart} and their resonating rainfall and evaporation recorder.
+%could be too much info (below)
+The first version of BRACHI is expected to be able to survive for 3~years on 6~AA batteries in arctic conditions while taking data every 4~hours. BRACHI also supports local WiFi download of the data by standing near the pole with a laptop.
+
+\subsubsection{Accelerometer and temperature sensor}
+
+The oscillations of the pole are measured by an accelerometer that is mounted within the enclosure of BRACHI. The box uses an LSM6DSOX inertial measurement unit that is rated for 0--16~g acceleration and an operating temperature range of $-$40~ºC to 85~ºC. The accelerometer is equipped with a temperature sensor to correct for acceleration measurement drift as well as the changing material properties of the pole with temperature. The difference between the temperature read and the ambient temperature is of negligible importance for length measurements of the pole due to the weak dependence of the frequency of oscillation on temperature.
+
+\subsubsection{Depth sensor}
+
+The depth sensor is downward facing and measures the distance between itself and the surface of the ice.
+% change ground to surface of the ice
+Good quality depth sensors cost more than BRACHI in its entirety, so a cheap alternative is being used. BRACHI's depth sensor is the HCSR-04, which is only rated to $-$20~ºC, has a range of 4~m, and is not meant for outdoor use. If the depth sensor is able to measure distances that agree with human field measurements, it will be useful to compare the values obtained with the pole length measurements processed from the acceleration. Table \ref{tab:mars_res} in Section \ref{sec:outdoors} presents the results of the accelerometer compared to the results of the depth sensor.
+
+\subsubsection{Sensor readout: ESP32 microcontroller}
+
+The ESP32 microcontroller model used is the DFR0654. It is responsible for receiving readings from the peripherals, low-level data processing (discussed in Section \ref{sec:daq}), and offering a WiFi access point for remote downloads of the data. This microcontroller was chosen for its $-$40~ºC rating, computational power large enough to process large Fourier transforms, ability to enter a low power state (in the tens of $\mu$A), and embedded WiFi capability. The entirety of the code that controls BRACHI is written in the Arduino programming language.
+
+\subsubsection{Batteries}
+
+BRACHI has the capacity to house 6~AA batteries with its two 3~x~AA battery holders. From energy usage predictions ****see github****, BRACHI should survive 3+~years of normal use when filled with 6~AA 3000~mAh lithium-ion batteries. Lithium-ion batteries are used for their survivability at low temperatures, like those of the Canadian Arctic.
+
+\subsubsection{Aluminum box and PCB}
+
+Inside BRACHI, the electronics are soldered to a printed circuit board (PCB), as can be seen in Figure \ref{fig:lake}. The PCB is fixed to the box with screws and standoffs. The closed box is watertight due to a rubber seal around the edge of the box and O-rings below each screw. The eyes of the depth sensor are passed through fitted holes in the metal box. A custom-made metal cutout is added to put pressure on the O-rings around the eyes of the depth sensor to ensure water tightness. The box is attached to the pole via U-bolts going through the back plate of BRACHI. The box,  electronics, backplate, and U-bolts cumulatively weigh approximately 0.54~kg.
+
+\subsection{Frequency as a function of length}
+
+This section describes the physics governing the oscillation modes and frequencies of BRACHI, which is modeled as an extended mass on the end of a massive vertical pole. The simplest case for this motion is to look at the first frequency mode of the pole which corresponds to a swaying motion, as predicted by the Euler-Bernoulli beam model. The formula for the first frequency mode as a function of the pole parameters is commonly derived in engineering textbooks like \citet[ch. 8]{belvins} and \citet[ch. 7]{stokey}.
+
+On the other hand, attempting to solve the general motion of the pole with tip mass for all of its frequency modes yields a partial differential equation with an infinite number of eigenmodes of bending, as \citet{erturk_inman} highlight. The eigenvalues of bending of the pole $\lambda_n$ solve the equation
+\begin{equation}
+\label{eqn:eig_n}
+    0 =  1 + \text{cos}(\lambda_n)\text{cosh}(\lambda_n) + \lambda_n \frac{M_\text{eff}}{\pi L \rho (R^2-r^2)} \left(\text{cos}(\lambda_n)\text{sinh}(\lambda_n) - \text{sin}(\lambda_n)\text{cosh}(\lambda_n)\right), % - \lambda_n^3 \frac{I_t}{m_\text{B} L^3} \left(\text{cos}(\lambda_n)\text{sinh}(\lambda_n) + \text{sin}(\lambda_n)\text{cosh}(\lambda_n)\right)
+\end{equation}
+where $M_\text{eff}$ is the effective mass at the tip of the pole (as defined in Equation \ref{eqn:effective_mass}), $L$ the length of the pole that is free above the ice, $\rho$ the density of the pole, $R$ the outer radius of the pole, and $r$ the inner radius of the pole.
+
+The eigenvalues $\lambda_n$ are directly related to the frequencies of oscillation of the pole via
+\begin{equation}
+\label{eqn:f_n}
+    \lambda_n^4 = (2 \pi f_n)^2 \frac{4 \rho (R^2-r^2) L^4}{E (R^4-r^4)},
+\end{equation}
+where $f_n$ is the $n^{\text{th}}$ frequency mode of the pole. The Young's modulus $E$, a measure of material stiffness, is dependent on temperature. Values for $E$ as a function of temperature can be found using engineering lookup tables ***cite*** and fitted for using a low order polynomial.
+
+Going back to the effective mass from Equation \ref{eqn:f_n}, it can be computed via
+\begin{equation}
+\label{eqn:effective_mass}
+    M_\text{eff} = \int_0^L\mu(x)\phi_n^2(x)dx,
+\end{equation}
+as seen in \citet[ch. 29]{stokey}. Here, $\mu(x)$ is the linear density of the box as a function of position $x$ and $\phi_n(x)$ is the mode shape of the pole for the $n^\text{th}$ mode. The mode shape represents the displacement of the pole from equilibrium and can be found with \citet{erturk_inman}. The equation for the mode shape will be omitted here for conciseness. Given that the mode shape $\phi_n(x)$ depends on the effective tip mass $M_\text{eff}$, and the effective tip mass also depends on the mode shape, they cannot be found independently. Instead, they are found iteratively. Starting with $M_\text{eff} = m_\text{BRACHI}$, a trial mode shape is determined and used to compute a new effective mass. This process is continued until the effective mass converges to a desired precision.
+
+\section{Data acquisition and analysis methods}
+\label{sec:daq}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{box_17_spectrum_sum_202505150002.png}
+    \caption{***Changes to the plot to be included*** Frequency spectrum of a 3~m long pole in the wind obtained from performing a Fourier transform on the acceleration as a function of time of the pole. The base of the pole is encased in the ice of a lake. The red circle represents the fundamental of the first frequency mode, while the red square represents the second harmonic. The blue circle represents the fundamental of the second frequency mode, while the blue square is its second harmonic. The green triangles are modulated frequencies between the first and second fundamental frequencies due to mode coupling. Some peaks, like the one at 7.42~Hz, are rejected due to inharmonicity, while others, like the one at 25.49~Hz, are rejected due to being systematic noise.}
+    \label{fig:fft}
+\end{figure}
+
+The acceleration of the pole as a function of time is saved directly to the micro SD card in BRACHI. These acceleration measurements can then be processed offline by a computer to allow for more robust data processing. The first step of processing the acceleration measurements is to apply a Fourier transform to determine the frequencies composing the motion of the pole. Figure \ref{fig:fft} presents all the frequency peaks that are typically found in the motion of a pole in the wind. The first frequency mode $F_1$ can be seen along with its harmonics. The fundamental mode corresponds to the pole swaying from left to right. The second frequency mode $F_2$, and its harmonics, correspond to the pole oscillating with a node along the length of the pole. Higher frequency modes could potentially be seen with longer poles. Finally, modulated peaks flank the fundamental peak of the second frequency mode at $F_2$ ± $F_1$. The spectrum shown in Figure \ref{fig:fft} contains more peaks than can be expected from a normal measurement. In a lot of cases, only $F_1$ and its second harmonic can be seen distinctly. Other times, $F_1$ will be absent, while $F_2$ is clearly visible.
+
+To isolate the correct frequency peaks, multiple consecutive measurements are made and a voting algorithm ensures that wrongfully selected peaks are rejected. The voting algorithm matches every peak detected against one another. If two peaks have similar values or are harmonics, they vote for each other.
+%peak at what frequency? at what time; reference github
+The peak with the most votes is selected as the correct frequency and all peaks similar to the correct one are kept as valid data. By this process, wrongfully selected peaks will not gain enough votes and will be discarded if they are not similar to the correct frequency. $F_1$ and $F_2$ measurements are then separately converted to lengths using the estimate of the $n^{\text{th}}$ frequency mode as a function of length found in Equation \ref{eqn:f_n}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Measurements and calibration in a controlled environment}
+
+\subsection{Indoors measurement setup}
+
+
+
+BRACHI was tested in a controlled laboratory setting to validate the relation between the frequency and the length of the pole as presented in Equation \ref{eqn:f_n}.
+%As seen in Figure \ref{fig:clamp},
+This validation was done by clamping the pole to a table and displacing the free end (where BRACHI is attached) to induce free vibration, which was then measured over the span of roughly 5~minutes for each pole length. A measuring tape was used to measure the distance from the tip of the pole to the point right before the pole enters the clamp, to a precision of 0.25~cm. This value was taken to be the true length of the pole. Parameters like the inner and outer radius of the pole, as well as the mass of BRACHI, were determined using a caliper and a scale, respectively.
+
+\subsection{Controlled environment measurement results}
+\label{sec:indoors}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{f1vl.png}
+    \caption{First frequency mode of a pole with tip mass as a function of the length of the pole. The pole is clamped to a table at different positions to simulate being encased in ice. The physical prediction curve (dark blue) uses the parameters of the pole as well as Equation \ref{eqn:f_n} while the exponential correction to the physical prediction (light blue) adds a $-e^{aL+b}$ term to the physical prediction to account for the imperfect boundary condition of the clamp, as explained in Section \ref{sec:indoors}.}
+    \label{fig:fvl}
+\end{figure}
+
+Figure \ref{fig:fvl} shows that frequency measurements of the pole with tip mass agree with the physical prediction as seen in Equation \ref{eqn:f_n}, above pole lengths of 1.4~m. For lengths under 1.4~m, the frequency is lower than the predicted frequency, most likely due to the clamp not being a perfectly rigid boundary. Because shorter poles are stiffer, the torque applied on the clamp, induced by the free motion of the pole, is greater. This effect allows the pole to have an artificially increased length since the motion of the pole goes past where the pole and clamp first come into contact. Another explanation could be that the Euler-Bernoulli model of a beam does not match the pole used. For shorter beams, rotational bending and shear deformation become more important. These effects are accounted for in the \citet{timoshenko} beam model, though this theory is typically applied to much stockier poles.
+
+To model the trend in the residuals, a term of the form $-e^{aL + b}$ is added to the equation of frequency as a function of length (\ref{eqn:f_n}). This term was chosen because the residuals below 1.4~m resemble an exponential. Furthermore, the factor satisfies the need to fit a non-linear trend with as few variables as possible. Since the fit with the additional term generates residuals that have no obvious trend, the exponential seems to compensate well the behavior at smaller pole lengths.
+
+% change physical prediction -> equation
+When using the frequency measurements to obtain the length of the pole, the physical prediction above 1.4~m allows for accurate measurements with a precision of 0.5~±~0.2~cm, as can be seen in Figure \ref{fig:diff}. The addition of the correction term allows for similar accuracy below 1.4~m. These results show that the length of a pole can be found with sub-centimeter precision using its frequency of oscillation as measured using BRACHI.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Screenshot 2025-08-05 at 02.06.32.png}
+    \caption{Difference between the length of the pole as computed from the first frequency mode measurements and the length of the pole measured using a measuring tape. The points that rely solely on the physical prediction (dark blue) are, on average, 0.5~±~0.2~cm away from the true length, except for shorter lengths (<1.4~m) where the correction factor (light blue) is necessary to maintain this level of precision.}
+    \label{fig:diff}
+\end{figure}
+
+Figure \ref{fig:diff} also shows a trend for increasingly large error bars for longer pole lengths. This increase is explained by the first frequency mode becoming flatter as the length increases, such that small deviations in frequency have a large impact on the length measured. Thankfully, longer poles also exhibit higher frequency modes, which do not flatten as quickly as the first frequency mode. Using poles that are made of materials stiffer than aluminum or that have thicker walls could alleviate this issue, by making the frequency as a function of length less flat at longer pole lengths.
+
+\section{Outdoors calibration}
+\label{sec:outdoors}
+
+\subsection{Outdoors measurement setup}
+
+In May 2025, BRACHI was deployed at the McGill Arctic Research Station (MARS) on Umingmat Nunaat (Axel Heiberg Island), Nunavut, Canada. Three mass balance stakes were inserted in the ice of Color lake and subsequently frozen in. By taking data over a week, the poles on the lake were used for signal-to-noise calibrations of BRACHI and second frequency mode measurements. The surface ice depth was not expected to change significantly over the course of the observation period. Other boxes on the glacier were taking ice depth measurements over the entirety of the melt season to observe ice level changes, though this data is yet to be analyzed and will be the subject of a future publication. Table \ref{tab:mars_res} in Section \ref{sec:outdoors_res} presents the results processed from the calibration poles.
+
+\subsection{Outdoors measurement results}
+\label{sec:outdoors_res}
+
+%
+% cal; fig 5a and fig 5b to make it easier to refer to
+%
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{box_16_zoom_full_zoomboth_l_with_temp.png}
+    \caption{Measured depth sensor distance, computed length from the frequency of the pole, and temperature as a function of time as measured by BRACHI for a pole of 200~±~1~cm (starting length on 2025--05--13~13:00). The computed length is constant over consecutive days, but fluctuates daily with temperature. The depth sensor fails to measure the distance and stops taking measurements at low temperatures.}
+    \label{fig:mars}
+\end{figure}
+
+An example of the data obtained, from the calibration poles set on Color Lake next to MARS, can be seen in Figure \ref{fig:mars} for a 2 m pole. The data presents both the length, as computed from the frequency, and the depth, as measured by the depth sensor, overlapped with the temperature. When zooming in on the length as measured by the frequency, it is possible to see that the length varies periodically, seemingly following the temperature. This trend suggests that temperature variations affect the properties of the ice such that the pole thaws by 2--3~cm when it's warmer.  From Figure \ref{fig:mars}, it is also observed that the computed length increases by 7--9~cm whenever the temperature rises above 5~°C (2025--05--19 to 2025--05--20). This increase is due to a puddle of water forming at the base of the pole, as observed in the field.
+
+ From the zoomed in view in Figure \ref{fig:mars}, it is also possible to see that the length computed from $F_2$ follows the length from $F_1$ nearly perfectly. This agreement suggests that Equation \ref{eqn:f_n} and it's implementation was done adequately, such that all frequency modes can be theoretically predicted. Besides, as expected from the results of Figure \ref{fig:diff}, the length from $F_2$ has smaller error and less variance than the length from $F_1$. It can also be noted that the length measurements from $F_2$ appears less often than that for $F_1$. This discrepancy stems from $F_2$ requiring stronger winds than $F_1$ to appear in the motion.
+
+ On the 1~m pole, the depth sensor was able to measure the distance to the ground for nearly the entirety of the observation period. On the contrary, the frequency measurements of the 1~m pole were more scarce, owing to the fact that a shorter, sturdier pole requires stronger winds to drive its motion. The 2~m and 3~m poles were able to obtain frequency measurements for the entire observation window, though their depth sensor could not measure the distance to the ground. The lack of depth sensor measurements above 2~m implies that the range of the depth sensor in arctic conditions is smaller than the advertised range of 4~m.
+ Potential issues include a weak signal for decreasing temperatures, sound damping from the snow, and an echo coming from the pole itself. The latter is thought to be the reason depth sensor measurements in Figure \ref{fig:mars} are frequently around 4--6~cm.
+ To summarize, while the depth sensor underperforms due to its shorter than expected range, it remains useful for BRACHI as it enables pole length measurements at short pole lengths and low wind conditions, at which point the oscillation of the pole is too weak to measure. 
+
+\begin{table}
+    \caption{Comparison between the length of poles on a frozen lake as measured with a measuring tape, computed using the first and second frequency modes of the pole, and measured using the depth sensor. Values presented are averaged over a 24~h window starting on May 14, 2025 and presented with the standard deviation of the measurement over a day.}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\begin{tabular}{c}
+Starting length of \\ 
+pole (tip to ice) via \\ 
+measuring tape (cm)
+\end{tabular}
+& \begin{tabular}{c}
+$F_1$ \\ 
+Length (cm)
+\end{tabular}
+& \begin{tabular}{c}
+$F_1$ Length\\ 
+Std. (cm)
+\end{tabular}
+& \begin{tabular}{c}
+$F_2$ \\ 
+Length (cm)
+\end{tabular}
+& \begin{tabular}{c}
+$F_2$ Length\\ 
+Std. (cm)
+\end{tabular}
+& \begin{tabular}{c}
+Depth sensor \\ 
+Length (cm)
+\end{tabular}
+& \begin{tabular}{c}
+Depth sensor \\ 
+Std. (cm)
+\end{tabular} \\
+\hline
+99 ± 1   & 102.8 ± 0.1 & 0.7 & --    & --  & 103.0 ± 0.2 & 1 \\
+\hline
+200 ± 1  & 200.7 ± 0.1 & 0.8 & 200.5 ± 0.1 & 0.6 & --  & -- \\
+\hline
+300 ± 1  & 305.8 ± 0.4 & 3   & 304.0 ± 0.3  & 2   & --  & -- \\
+\hline
+\end{tabular}
+    \label{tab:mars_res}
+\end{table}
+
+Table \ref{tab:mars_res} presents the lengths of the pole for each BRACHI used, what length was computed from each frequency mode, and depth sensor measurements. This data is compiled over a day such that the results are independent of temperature extremes occurring within a 24~h window. For the 3 calibration poles, it is possible to see that the length of the pole, as computed from the frequencies of oscillation, are from 0.7~±~1~cm to 5.8~±~1~cm larger than the length of the pole measured with a measuring tape. As argued previously, averaging the computed length over a day is bound to yield a positive offset as the thaw-refreeze cycle can only make the exposed pole length longer. To quantify the variation in length over a day, the standard deviation of the computed length is also provided in Table \ref{tab:mars_res}. For the length measurements that are 5.8~±~1 cm above the value measured with a measuring tape, the standard deviation is 3~cm, indicating large periodic variations in length over a day. Another factor contributing to the offset is that the first data from the motion of the pole came in 24~h after the measurement of the length of the pole with a measuring tape. This time difference could have induced an offset on the order of 1~cm or lower.
+
+In summary, BRACHI measurements are consistent with tape measurements once a periodic change reflecting the effect of thaw–refreeze cycles is accounted for. Specifically, within shorter time windows (1~h), the frequency-derived lengths are highly self-consistent and show reduced variability, indicating that the method can achieve more accurate pole length determinations when analyzed over such intervals. For longer poles, the second frequency mode provides greater reliability than the first. Overall, results suggest that BRACHI can measure true pole lengths with high precision, considering offsets primarily linked to environmental effects rather than measurement error.
+
+\conclusions  %% \conclusions[modified heading if necessary]
+
+***CONSTRUCTION SITE***
+
+****[Include a summary of how your system complements other existing techniques and what we can offer with the performance that you've demonstrated here.  We might need Laura's input for the discussions of use cases.  Also briefly mention future developments/improvements if you have any in mind.]****
+
+BRACHIOSAURUS was created to obtain in-situ glacier mass balance measurements remotely and continuously by tracking the oscillation frequency of mass balance stakes in the wind. It was shown that the length of a pole can be predicted to within 0.5~cm of its true value under controlled conditions, requiring no calibration. In the field, BRACHIOSAURUS length estimates were consistent with tape measurements, but day-scale changes in ice and temperature can introduce up to 3~cm of variability. Each BRACHIOSAURUS unit costs only \$50~USD, and the design allows for easy repair or modification in the field.
+
+\codeavailability{TEXT} %% use this section when having only software code available
+
+
+\dataavailability{TEXT} %% use this section when having only data sets available
+
+
+\codedataavailability{TEXT} %% use this section when having data sets and software code available
+
+
+\sampleavailability{TEXT} %% use this section when having geoscientific samples available
+
+
+\videosupplement{TEXT} %% use this section when having video supplements available
+
+
+\appendix
+\section{}    %% Appendix A
+
+\subsection{}     %% Appendix A1, A2, etc.
+
+
+\noappendix       %% use this to mark the end of the appendix section. Otherwise the figures might be numbered incorrectly (e.g. 10 instead of 1).
+
+%% Regarding figures and tables in appendices, the following two options are possible depending on your general handling of figures and tables in the manuscript environment:
+
+%% Option 1: If you sorted all figures and tables into the sections of the text, please also sort the appendix figures and appendix tables into the respective appendix sections.
+%% They will be correctly named automatically.
+
+%% Option 2: If you put all figures after the reference list, please insert appendix tables and figures after the normal tables and figures.
+%% To rename them correctly to A1, A2, etc., please add the following commands in front of them:
+
+\appendixfigures  %% needs to be added in front of appendix figures
+
+\appendixtables   %% needs to be added in front of appendix tables
+
+%% Please add \clearpage between each table and/or figure. Further guidelines on figures and tables can be found below.
+
+
+
+\authorcontribution{TEXT} %% this section is mandatory
+
+\competinginterests{TEXT} %% this section is mandatory even if you declare that no competing interests are present
+
+\disclaimer{TEXT} %% optional section
+
+\begin{acknowledgements}
+TEXT
+\end{acknowledgements}
+
+
+
+
+%% REFERENCES
+
+%% The reference list is compiled as follows:
+
+\begin{thebibliography}{}
+
+\bibitem[Stewart, R. D. \& al. (2012)]{stewart}
+Stewart, R. D., R. Hut, D. E. Rupp, H. Gupta, and J. S. Selker (2012), A resonating rainfall and evaporation recorder, Water Resour. Res., 48, W08601, doi:10.1029/2011WR011529.
+
+
+\bibitem[Belvins, R. D. (1979)]{belvins}
+Belvins, R. D. (1979), Formulas for natural frequency and mode shape, Van Nostrand Reinhold.
+
+\bibitem[Stokey, W. F. (2002)]{stokey}
+Stokey, W. F. (2002). Vibration of Systems Having Distributed Mass and Elasticity. In Harris’ Shock and Vibration Handbook (5th edition). McGraw-Hill. 
+
+\bibitem[Erturk A. and Inman D. J. (2011)]{erturk_inman}
+Erturk A. and Inman D. J. (2011). Modal Analysis of a Uniform Cantilever with a Tip Mass. In Piezoelectric Energy Harvesting (First edition). John Wiley \& Sons. 
+
+\bibitem[Timoshenko, S.P. (1922)]{timoshenko}
+Prof. S.P. Timoshenko (1922) X. On the transverse vibrations of bars of uniform cross-section, The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science, 43:253, 125-131, DOI: 10.1080/14786442208633855
+
+
+\end{thebibliography}
+
+%% Since the Copernicus LaTeX package includes the BibTeX style file copernicus.bst,
+%% authors experienced with BibTeX only have to include the following two lines:
+%%
+%% \bibliographystyle{copernicus}
+%% \bibliography{example.bib}
+%%
+%% URLs and DOIs can be entered in your BibTeX file as:
+%%
+%% URL = {http://www.xyz.org/~jones/idx_g.htm}
+%% DOI = {10.5194/xyz}
+
+
+%% LITERATURE CITATIONS
+%%
+%% command                        & example result
+%% \citet{jones90}|               & Jones et al. (1990)
+%% \citep{jones90}|               & (Jones et al., 1990)
+%% \citep{jones90,jones93}|       & (Jones et al., 1990, 1993)
+%% \citep[p.~32]{jones90}|        & (Jones et al., 1990, p.~32)
+%% \citep[e.g.,][]{jones90}|      & (e.g., Jones et al., 1990)
+%% \citep[e.g.,][p.~32]{jones90}| & (e.g., Jones et al., 1990, p.~32)
+%% \citeauthor{jones90}|          & Jones et al.
+%% \citeyear{jones90}|            & 1990
+
+
+
+%% FIGURES
+
+%% When figures and tables are placed at the end of the MS (article in one-column style), please add \clearpage
+%% between bibliography and first table and/or figure as well as between each table and/or figure.
+
+% The figure files should be labelled correctly with Arabic numerals (e.g. fig01.jpg, fig02.png).
+
+
+%% ONE-COLUMN FIGURES
+
+%%f
+%\begin{figure}[t]
+%\includegraphics[width=8.3cm]{FILE NAME}
+%\caption{TEXT}
+%\end{figure}
+%
+%%% TWO-COLUMN FIGURES
+%
+%%f
+%\begin{figure*}[t]
+%\includegraphics[width=12cm]{FILE NAME}
+%\caption{TEXT}
+%\end{figure*}
+%
+%
+%%% TABLES
+%%%
+%%% The different columns must be seperated with a & command and should
+%%% end with \\ to identify the column brake.
+%
+%%% ONE-COLUMN TABLE
+%
+%%t
+%\begin{table}[t]
+%\caption{TEXT}
+%\begin{tabular}{column = lcr}
+%\tophline
+%
+%\middlehline
+%
+%\bottomhline
+%\end{tabular}
+%\belowtable{} % Table Footnotes
+%\end{table}
+%
+%%% TWO-COLUMN TABLE
+%
+%%t
+%\begin{table*}[t]
+%\caption{TEXT}
+%\begin{tabular}{column = lcr}
+%\tophline
+%
+%\middlehline
+%
+%\bottomhline
+%\end{tabular}
+%\belowtable{} % Table Footnotes
+%\end{table*}
+%
+%%% LANDSCAPE TABLE
+%
+%%t
+%\begin{sidewaystable*}[t]
+%\caption{TEXT}
+%\begin{tabular}{column = lcr}
+%\tophline
+%
+%\middlehline
+%
+%\bottomhline
+%\end{tabular}
+%\belowtable{} % Table Footnotes
+%\end{sidewaystable*}
+%
+%
+%%% MATHEMATICAL EXPRESSIONS
+%
+%%% All papers typeset by Copernicus Publications follow the math typesetting regulations
+%%% given by the IUPAC Green Book (IUPAC: Quantities, Units and Symbols in Physical Chemistry,
+%%% 2nd Edn., Blackwell Science, available at: http://old.iupac.org/publications/books/gbook/green_book_2ed.pdf, 1993).
+%%%
+%%% Physical quantities/variables are typeset in italic font (t for time, T for Temperature)
+%%% Indices which are not defined are typeset in italic font (x, y, z, a, b, c)
+%%% Items/objects which are defined are typeset in roman font (Car A, Car B)
+%%% Descriptions/specifications which are defined by itself are typeset in roman font (abs, rel, ref, tot, net, ice)
+%%% Abbreviations from 2 letters are typeset in roman font (RH, LAI)
+%%% Vectors are identified in bold italic font using \vec{x}
+%%% Matrices are identified in bold roman font
+%%% Multiplication signs are typeset using the LaTeX commands \times (for vector products, grids, and exponential notations) or \cdot
+%%% The character * should not be applied as mutliplication sign
+%
+%
+%%% EQUATIONS
+%
+%%% Single-row equation
+%
+%\begin{equation}
+%
+%\end{equation}
+%
+%%% Multiline equation
+%
+%\begin{align}
+%& 3 + 5 = 8\\
+%& 3 + 5 = 8\\
+%& 3 + 5 = 8
+%\end{align}
+%
+%
+%%% MATRICES
+%
+%\begin{matrix}
+%x & y & z\\
+%x & y & z\\
+%x & y & z\\
+%\end{matrix}
+%
+%
+%%% ALGORITHM
+%
+%\begin{algorithm}
+%\caption{...}
+%\label{a1}
+%\begin{algorithmic}
+%...
+%\end{algorithmic}
+%\end{algorithm}
+%
+%
+%%% CHEMICAL FORMULAS AND REACTIONS
+%
+%%% For formulas embedded in the text, please use \chem{}
+%
+%%% The reaction environment creates labels including the letter R, i.e. (R1), (R2), etc.
+%
+%\begin{reaction}
+%%% \rightarrow should be used for normal (one-way) chemical reactions
+%%% \rightleftharpoons should be used for equilibria
+%%% \leftrightarrow should be used for resonance structures
+%\end{reaction}
+%
+%
+%%% PHYSICAL UNITS
+%%%
+%%% Please use \unit{} and apply the exponential notation
+
+
+\end{document}
