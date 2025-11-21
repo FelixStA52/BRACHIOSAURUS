@@ -101,9 +101,9 @@
 %% If authors contributed equally, please mark the respective author names with an asterisk, e.g. "\Author[2,*]{Anton}{Smith}" and "\Author[3,*]{Bradley}{Miller}" and add a further affiliation: "\affil[*]{These authors contributed equally to this work.}".
 
 
-\runningtitle{TEXT}
+\runningtitle{Creation of a low-cost ice melt monitoring system}
 
-\runningauthor{TEXT}
+\runningauthor{St-Amour et al.}
 
 
 
@@ -141,9 +141,9 @@ Abstract
 
 \introduction  %% \introduction[modified heading if necessary]
 
-The melting of glaciers and ice caps ice sheets is responsible for 24\% of observed global sea level rise since YYYY, and continued contributions are project to persist through the 21st century. 
+% The melting of glaciers and ice caps ice sheets is responsible for 24\% of observed global sea level rise since YYYY, and continued contributions are project to persist through the 21st century. 
 
-Glaciers and ice caps, recognized indicators of a changing climate, have exhibited continued and often accelerated, mass loss through the early 21st century (e.g. Hugonnet et al., 2021) which holds notable downstream repercussions for sea level rise, as well as communities and ecosystems dependent on their runoff (Immerzeel et al., 2021). The glaciological mass balance method (e.g. Østrem and Brugman, 1966) is one approach used to quantify annual changes within a glacier system, using an input-output approach that interpolates and extrapolates measurements of mass gain (primarily snow accumulation) and mass loss (primarily ice melt and iceberg calving) across the glacier to gain a glacier-wide mass change commonly reported in meters of water equivalent (m w.e.) (Cogley et al., 2011). Point measurements of accumulation are made from measurements of snow thickness and density in snowpits, while ice melt is most commonly determined from measuring the exposure of poles (mass balance stakes) drilled into the ice. Measurements for mass balance are most generally made only once or twice per year, representing annual or seasonal summer and winter balances, respectively (Cogley et al., 2011). While this observation frequency is sufficient for standardized mass balance reporting, there is an increasing demand for higher temporal resolution data to support and improve mass balance projections and runoff models (World Glacier Monitoring Service, National Correspondents meeting, Nov. 2025). For most glacierized regions in the world, including the Canadian Arctic, ice melt is the dominant control on annual mass balance (Sharp et al., 2011). Therefore, continuous melt monitoring can serve as a valuable, real-time, indicator of mass balance conditions and can support timely runoff projections for downstream environments and communities.
+Glaciers and ice caps, recognized indicators of a changing climate, have exhibited continued and often accelerated mass loss through the early 21st century (e.g., \citet{hugonnet}) which holds notable downstream repercussions for sea level rise, as well as communities and ecosystems dependent on their runoff \citep{immerzeel}. The glaciological mass balance method (e.g., \citet{ostrem}) is one approach used to quantify annual changes within a glacier system, using an input-output approach that interpolates and extrapolates measurements of mass gain (primarily snow accumulation) and mass loss (primarily ice melt and iceberg calving) across the glacier to gain a glacier-wide mass change commonly reported in meters of water equivalent \citep{cogley}. Point measurements of accumulation are made from measurements of snow thickness and density in snowpits, while ice melt is most commonly determined from measuring the exposure of poles (mass balance stakes) drilled into the ice. Measurements for mass balance are most generally made only once or twice per year, representing annual or seasonal summer and winter balances, respectively \citep{cogley}. While this observation frequency is sufficient for standardized mass balance reporting, there is an increasing demand for higher temporal resolution data to support and improve mass balance projections and runoff models (World Glacier Monitoring Service, National Correspondents meeting, Nov. 2025). For most glacierized regions in the world, including the Canadian Arctic, ice melt is the dominant control on annual mass balance \citep{sharp}. Therefore, continuous melt monitoring can serve as a valuable, real-time, indicator of mass balance conditions and can support timely runoff projections for downstream environments and communities.
 
 This study presents the development of instrumentation to support the continuous monitoring of localized mass balance conditions in a glacier ablation zone, using White Glacier on Umingmat Nunaat (Axel Heiberg Island, Nunavut) in the Canadian high-Arctic as a test site.
 
@@ -194,7 +194,7 @@ Inside BRACHI, the electronics are soldered to a printed circuit board (PCB), as
 
 \subsection{Frequency as a function of length}
 
-This section describes the physics governing the oscillation modes and frequencies of BRACHI, which is modeled as an extended mass on the end of a massive vertical pole. The simplest case for this motion is to look at the first frequency mode of the pole which corresponds to a swaying motion, as predicted by the Euler-Bernoulli beam model. The formula for the first frequency mode as a function of the pole parameters is commonly derived in engineering textbooks like \citet[ch. 8]{belvins} and \citet[ch. 7]{stokey}.
+This section describes the physics governing the oscillation modes and frequencies of BRACHI, which is modeled as an extended mass on the end of a massive vertical pole. The simplest case for this motion is to look at the first frequency mode of the pole which corresponds to a swaying motion, as predicted by the Euler-Bernoulli beam model. The formula for the first frequency mode as a function of the pole parameters is commonly derived in engineering textbooks like \citet[ch. 8]{blevins} and \citet[ch. 7]{stokey}.
 
 On the other hand, attempting to solve the general motion of the pole with tip mass for all of its frequency modes yields a partial differential equation with an infinite number of eigenmodes of bending, as \citet{erturk_inman} highlight. The eigenvalues of bending of the pole $\lambda_n$ solve the equation
 \begin{equation}
@@ -411,35 +411,9 @@ TEXT
 
 %% REFERENCES
 
-%% The reference list is compiled as follows:
+\bibliographystyle{copernicus}
+\bibliography{brachi.bib}
 
-\begin{thebibliography}{}
-
-\bibitem[Stewart, R. D. \& al. (2012)]{stewart}
-Stewart, R. D., R. Hut, D. E. Rupp, H. Gupta, and J. S. Selker (2012), A resonating rainfall and evaporation recorder, Water Resour. Res., 48, W08601, doi:10.1029/2011WR011529.
-
-
-\bibitem[Belvins, R. D. (1979)]{belvins}
-Belvins, R. D. (1979), Formulas for natural frequency and mode shape, Van Nostrand Reinhold.
-
-\bibitem[Stokey, W. F. (2002)]{stokey}
-Stokey, W. F. (2002). Vibration of Systems Having Distributed Mass and Elasticity. In Harris’ Shock and Vibration Handbook (5th edition). McGraw-Hill. 
-
-\bibitem[Erturk A. and Inman D. J. (2011)]{erturk_inman}
-Erturk A. and Inman D. J. (2011). Modal Analysis of a Uniform Cantilever with a Tip Mass. In Piezoelectric Energy Harvesting (First edition). John Wiley \& Sons. 
-
-\bibitem[Timoshenko, S.P. (1922)]{timoshenko}
-Prof. S.P. Timoshenko (1922) X. On the transverse vibrations of bars of uniform cross-section, The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science, 43:253, 125-131, DOI: 10.1080/14786442208633855
-
-
-\end{thebibliography}
-
-%% Since the Copernicus LaTeX package includes the BibTeX style file copernicus.bst,
-%% authors experienced with BibTeX only have to include the following two lines:
-%%
-%% \bibliographystyle{copernicus}
-%% \bibliography{example.bib}
-%%
 %% URLs and DOIs can be entered in your BibTeX file as:
 %%
 %% URL = {http://www.xyz.org/~jones/idx_g.htm}
