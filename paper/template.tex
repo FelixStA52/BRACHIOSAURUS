@@ -77,6 +77,7 @@
 %\usepackage{subfig}
 %\usepackage{rotating}
 
+\newcommand{\br}[1]{\textcolor{red}{\bf #1}}  % bold red text
 
 \begin{document}
 
@@ -143,14 +144,59 @@ Abstract
 
 % The melting of glaciers and ice caps ice sheets is responsible for 24\% of observed global sea level rise since YYYY, and continued contributions are project to persist through the 21st century. 
 
-Glaciers and ice caps, recognized indicators of a changing climate, have exhibited continued and often accelerated mass loss through the early 21st century (e.g., \citet{hugonnet}) which holds notable downstream repercussions for sea level rise, as well as communities and ecosystems dependent on their runoff \citep{immerzeel}. The glaciological mass balance method (e.g., \citet{ostrem}) is one approach used to quantify annual changes within a glacier system, using an input-output approach that interpolates and extrapolates measurements of mass gain (primarily snow accumulation) and mass loss (primarily ice melt and iceberg calving) across the glacier to gain a glacier-wide mass change commonly reported in meters of water equivalent \citep{cogley}. Point measurements of accumulation are made from measurements of snow thickness and density in snowpits, while ice melt is most commonly determined from measuring the exposure of poles (mass balance stakes) drilled into the ice. Measurements for mass balance are most generally made only once or twice per year, representing annual or seasonal summer and winter balances, respectively \citep{cogley}. While this observation frequency is sufficient for standardized mass balance reporting, there is an increasing demand for higher temporal resolution data to support and improve mass balance projections and runoff models (World Glacier Monitoring Service, National Correspondents meeting, Nov. 2025). For most glacierized regions in the world, including the Canadian Arctic, ice melt is the dominant control on annual mass balance \citep{sharp}. Therefore, continuous melt monitoring can serve as a valuable, real-time, indicator of mass balance conditions and can support timely runoff projections for downstream environments and communities.
+Glaciers and ice caps, recognized indicators of a changing climate,
+have exhibited continued and often accelerated mass loss through the
+early 21st century (e.g., \citet{hugonnet}).  These changes have
+strong implications for sea level rise, and communities and ecosystems
+that depend on the runoff \citep{immerzeel}.  The glaciological mass
+balance method (e.g., \citet{ostrem}) is one approach used to quantify
+annual changes within a glacier system, using an input-output approach
+that interpolates and extrapolates measurements of mass gain
+(primarily snow accumulation) and mass loss (primarily ice melt and
+iceberg calving) across the glacier to gain a glacier-wide mass change
+commonly reported in meters of water equivalent \citep{cogley}. Point
+measurements of accumulation are made from measurements of snow
+thickness and density in snowpits, while ice melt is most commonly
+determined from measuring the exposure of mass balance stakes drilled
+into the ice. Measurements for mass balance are most generally made
+only once or twice per year, representing annual or seasonal summer
+and winter balances, respectively \citep{cogley}. While this
+observation frequency is sufficient for standardized mass balance
+reporting, there is an increasing demand for data with higher temporal
+resolution to support and improve mass balance projections and runoff
+models.
+% (World Glacier Monitoring Service, National Correspondents meeting, Nov. 2025).
+For most glacierized regions in the world, including the Canadian
+Arctic, ice melt is the dominant control on annual mass balance
+\citep{sharp}. Therefore, continuous melt monitoring can serve as a
+valuable, real-time, indicator of mass balance conditions and can
+support timely runoff projections for downstream environments and
+communities.
 
-This study presents the development of instrumentation to support the continuous monitoring of localized mass balance conditions in a glacier ablation zone, using White Glacier on Umingmat Nunaat (Axel Heiberg Island, Nunavut) in the Canadian high-Arctic as a test site.
-
-
+\br{update this paragraph with a comprehensive description of other technologies}
 While geodetic methods for measuring glacial mass balance have seen their availability increase and cost decrease over the past decades, commonly used glaciological methods have generally not wandered too far from 20th century techniques. These methods for measuring in-situ surface ablation suffer from not allowing widespread and continuous measurements at an affordable cost. Depth sensor systems allow for continuous and accurate measurements, but are limited in their numbers on glaciers due to their high cost. The more traditional method using mass balance stakes is itself limited by its need for manual readings, impeding time resolution for ablation measurements.
 
-This paper discusses the theoretical background of pole physics, the design of BRACHI, and the validation of the measurement technique in a controlled environment, as well as preliminary results from outdoor measurements.
+This study presents the development of new instrumentation that
+continuously monitors mass balance stake exposure by recording
+wind-induced vibrational frequency.  The frequency depends sensitively
+on the exposed length, allowing sub-centimeter measurement precision.
+The instrumentation is designed to run autonomously in Arctic
+environmental conditions for up to several years, with measurements
+recorded every \br{time interval here}.  Initial tests have been
+conducted on White Glacier on Umingmat Nunaat (Axel Heiberg Island),
+Nunavut \br{concluding punchline here, saying that the widget works}.
+Because the cost of each device is comparatively low (approximately
+\$50~USD), the instrumentation presented here can potentially be
+deployed on large numbers of stakes, thus opening new possibilities in
+glacier mass balance measurements. \br{is it useful to have high
+  density of stakes?  or lots distributed over a larger area}.
+
+% This study presents the development of instrumentation to support the
+% continuous monitoring of localized mass balance conditions in a
+% glacier ablation zone, using White Glacier on Umingmat Nunaat (Axel
+% Heiberg Island, Nunavut) in the Canadian high-Arctic as a test site.
+
+% This paper discusses the theoretical background of pole physics, the design of BRACHI, and the validation of the measurement technique in a controlled environment, as well as preliminary results from outdoor measurements.
 
 
 \section{Methods}
