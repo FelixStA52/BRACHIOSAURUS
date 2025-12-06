@@ -82,7 +82,7 @@
 
 \begin{document}
 
-\title{A low-cost ice melt monitoring system using wind-induced motion of mass-balance stakes}
+\title{Creation of a low-cost ice melt monitoring system using wind-induced motion of mass-balance stakes}
 
 
 % \Author[affil]{given_name}{surname}
@@ -186,7 +186,7 @@ measurements of mass gain (primarily snow accumulation) and mass loss
 (primarily ice melt and iceberg calving) across the glacier to gain a
 glacier-wide mass change commonly reported in meters of water
 equivalent \citep{cogley}. Point measurements of accumulation are made
-from measurements of snow thickness and density in snow pits, while ice
+from measurements of snow thickness and density in snowpits, while ice
 melt is most commonly determined from measuring the exposure of
 mass-balance stakes drilled into the ice. Measurements for mass
 balance are most generally made only once or twice per year,
@@ -301,18 +301,13 @@ $-40^\circ$C and $20^\circ$C).
 
 \subsection{Depth sensor}
 
-An HCSR-04 ultrasonic sensor is affixed to a custom metal cutout and
+An HC-SR04 ultrasonic sensor is affixed to a custom metal cutout and
 mounted at the bottom of the enclosure, facing downward to measure the
-distance to the top surface of the glacier.  Although the HCSR-04 is
+distance to the top surface of the glacier.  Although the HC-SR04 is
 rated to only $-20^\circ$C and has a limited range of 4~m, it costs
-only $\sim$\$3~USD.  Other ultrasonic sensors with wider temperature
-ratings and longer distance sensing are typically $\sim$10 times more
-expensive and would nearly double the total \brachi\ cost.  The
-HCSR-04 is therefore used intentionally in an opportunistic manner,
-rather than providing a primary source of data.  When operating
-conditions permit, the ultrasonic sensor provides an affordable and
-valuable cross-check against stake lengths derived from the
-accelerometer data.
+only $\sim$\$3~USD.  When operating conditions permit, the ultrasonic
+sensor provides an affordable and valuable cross-check against stake
+lengths derived from the accelerometer data.
 
 \subsection{Microcontroller and data storage}
 
@@ -323,8 +318,8 @@ computational power for the required onboard data processing, ability
 to enter a low power state while drawing only tens of $\mu$A, and
 embedded wireless capability.  The wireless access point enables users
 to remotely download data, rather than physically accessing the micro
-SD.  The micro SD is an 8-GB Delkin Devices Utility+
-(S308APGJP-U1000-3) and is rated to $-40^\circ$.  The \brachi\ control
+SD.  The micro SD is a 4-GB Delkin Devices Utility+
+(S304GSEMC-U3000-3) and is rated to $-40^\circ$.  The \brachi\ control
 code is written in the Arduino programming language.
 
 \subsection{Batteries}
@@ -363,7 +358,7 @@ attached to the stake with U-bolts. The total weight of the
 
 The relationship between vibrational frequency and length is obtained
 by modeling a \brachi-equipped stake as a cylindrical Euler--Bernoulli
-beam with a concentrated mass at its free end, as illustrated in
+beam with a concentrated mass at its free end, as illlustrated in
 Figure~\ref{fig:fsvl}.  The basic equations that govern this system
 are available in engineering textbooks, e.g., \citet[ch.~8]{blevins}
 and \citet[ch.~7]{stokey}. The first, or fundamental, vibrational mode
@@ -393,12 +388,11 @@ Figure~\ref{fig:fsvl} shows the numerically computed frequency--length
 relationship for the first two vibrational modes of an example
 \brachi-equipped stake, along with the analytic prediction from
 Equation~\ref{eqn:f1vL}.  (The detailed stake parameters are given
-in~\S\ref{sec:outdoors}.)  A small discrepancy between the analytic and
+in~\S\ref{sec:outdoors}.)  A small discrepancy betwen the analytic and
 numerical solutions for $F_1$ is visible at $\lesssim$1~m and arises
-from the differences in assuming an extended or point mass.  In the
-remainder of this work, numerical solutions including an extended mass
-will be used for computing lengths from vibrational frequency
-measurements.
+from the differences in assuming an extended or point mass for BRACHI.  In the
+remainder of this work, numerical solutions will be used for computing
+lengths from vibrational frequency measurements.
 
 \section{Data acquisition and analysis methods}
 \label{sec:daq}
@@ -517,7 +511,7 @@ The difference between the data and prediction can be described with
 an additive exponential correction of the form $Ae^{BL}$, where $A$
 and $B$ are nuisance parameters.  Including this correction improves
 the agreement at short stake lengths, and the fitted exponential can
-be used to quantify systematic errors.  Although we demonstrate the
+be used to quantify systematic errors.  Although we demonstate the
 improved fit with lab data, we do not apply the correction to field
 data (\S\ref{sec:outdoors}) because the stake is seated more rigidly
 when embedded in ice, and most of the measurements use stakes with an
@@ -766,7 +760,7 @@ future publication that will discuss results from several
 \brachi\ units that were installed on White Glacier during the 2025
 melt season.  We are currently revising the \brachi\ design to
 incorporate an improved accelerometer and clock, reduce power
-consumption, increase sampling rates, and further lower the cost.
+consumption, increase samping rates, and further lower the cost.
 Future work will include validating the new design, including more
 detailed tests of accelerometer systematics and temperature
 dependence, and additional field tests.
@@ -884,7 +878,7 @@ of the stake and $E$ is the temperature-dependent Young’s modulus.
 \begin{acknowledgements}
   We are extremely grateful to Brandon Ruffolo, who provided test
   equipment and machined the \brachi\ metal cutouts late in the day
-  right before Christmas; Bo Curtis, who assisted with the Arctic
+  right before Christmas; Ben Cheung, who helped drill the holes in several of the BRACHI enclosures; Bo Curtis, who assisted with the Arctic
   deployment and tests; and Maya Smith, who provided feedback on the
   \brachi\ documentation and GitHub resources.  We extend our deepest
   thanks to Chris Omelon for supporting our work at the McGill Arctic
@@ -893,11 +887,10 @@ of the stake and $E$ is the temperature-dependent Young’s modulus.
   our sincere gratitude to the Resolute staff for their generous
   assistance and bottomless cookie jars.  We acknowledge the support
   of the Natural Sciences and Engineering Research Council of Canada
-  (NSERC), RGPIN-2019-04506, RGPNS 534549-19, and USRA; New Frontiers
-  in Research Fund, NFRFE-2021-00409; National Geographic Society
+  (NSERC), RGPIN-2019-04506, RGPNS 534549-19; New Frontiers in
+  Research Fund, NFRFE-2021-00409; National Geographic Society
   Explorer Grant NGS-94983T-22.  This research was undertaken, in
   part, thanks to funding from the Canada 150 Research Chairs Program.
-  We thank McGill Branches for support through the IMPRESS program.
 \end{acknowledgements}
 
 
