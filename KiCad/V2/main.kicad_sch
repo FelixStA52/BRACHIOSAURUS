@@ -934,10 +934,22 @@
 		(uuid "12b32ec9-86d2-4afb-9546-d9137dda56f3")
 	)
 	(junction
+		(at 173.99 90.17)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "151a0120-029c-47b5-89b3-cda572b1043f")
+	)
+	(junction
 		(at 125.73 73.66)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2727a7f8-db14-423c-9673-a3c031e18d1a")
+	)
+	(junction
+		(at 171.45 92.71)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "39a3fc9b-d848-481c-9c72-e5d869dc9897")
 	)
 	(junction
 		(at 71.12 142.24)
@@ -946,22 +958,16 @@
 		(uuid "450f74ed-9927-41ad-8e01-6eb2c7309647")
 	)
 	(junction
-		(at 176.53 90.17)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "559acc99-94ce-4bf9-bfed-84dbe1df7d09")
-	)
-	(junction
-		(at 173.99 92.71)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "6dde2344-a835-44d4-935e-c387d55a47eb")
-	)
-	(junction
 		(at 175.26 153.67)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "841eb4ce-9112-42b5-8a6a-9d0383206cf9")
+	)
+	(junction
+		(at 182.88 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ab8e3a85-d240-4c57-a566-ef5f48dd66fb")
 	)
 	(junction
 		(at 125.73 118.11)
@@ -1035,7 +1041,7 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 139.7) (xy 205.74 116.84)
+			(xy 205.74 134.62) (xy 205.74 116.84)
 		)
 		(stroke
 			(width 0)
@@ -1275,7 +1281,7 @@
 	)
 	(wire
 		(pts
-			(xy 165.1 92.71) (xy 173.99 92.71)
+			(xy 165.1 92.71) (xy 171.45 92.71)
 		)
 		(stroke
 			(width 0)
@@ -1395,7 +1401,7 @@
 	)
 	(wire
 		(pts
-			(xy 175.26 147.32) (xy 181.61 147.32)
+			(xy 175.26 147.32) (xy 182.88 147.32)
 		)
 		(stroke
 			(width 0)
@@ -1425,7 +1431,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 114.3) (xy 176.53 114.3)
+			(xy 208.28 114.3) (xy 173.99 114.3)
 		)
 		(stroke
 			(width 0)
@@ -1445,7 +1451,27 @@
 	)
 	(wire
 		(pts
-			(xy 200.66 147.32) (xy 226.06 147.32)
+			(xy 176.53 134.62) (xy 176.53 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6e3de3e8-0abd-4716-88e4-3f988275229f")
+	)
+	(wire
+		(pts
+			(xy 171.45 92.71) (xy 190.5 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6f95e26e-748e-4beb-b23f-49542cc09cf2")
+	)
+	(wire
+		(pts
+			(xy 201.93 147.32) (xy 226.06 147.32)
 		)
 		(stroke
 			(width 0)
@@ -1545,7 +1571,7 @@
 	)
 	(wire
 		(pts
-			(xy 176.53 114.3) (xy 176.53 90.17)
+			(xy 173.99 114.3) (xy 173.99 90.17)
 		)
 		(stroke
 			(width 0)
@@ -1615,6 +1641,16 @@
 	)
 	(wire
 		(pts
+			(xy 182.88 134.62) (xy 176.53 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a3efc19-e66c-47c1-b8d8-e3c8c627383f")
+	)
+	(wire
+		(pts
 			(xy 165.1 80.01) (xy 190.5 80.01)
 		)
 		(stroke
@@ -1675,16 +1711,6 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 92.71) (xy 190.5 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "aa7f972c-a38c-402a-9f3c-51a7018998e0")
-	)
-	(wire
-		(pts
 			(xy 76.2 102.87) (xy 129.54 102.87)
 		)
 		(stroke
@@ -1705,7 +1731,7 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 116.84) (xy 173.99 92.71)
+			(xy 171.45 116.84) (xy 171.45 92.71)
 		)
 		(stroke
 			(width 0)
@@ -1745,7 +1771,7 @@
 	)
 	(wire
 		(pts
-			(xy 200.66 139.7) (xy 205.74 139.7)
+			(xy 201.93 134.62) (xy 205.74 134.62)
 		)
 		(stroke
 			(width 0)
@@ -1765,13 +1791,23 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 90.17) (xy 176.53 90.17)
+			(xy 167.64 90.17) (xy 173.99 90.17)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "bbfeb0f8-018f-40bb-8723-c014436a5cf3")
+	)
+	(wire
+		(pts
+			(xy 173.99 90.17) (xy 190.5 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bf71b2fa-927f-4621-83c9-39a004305954")
 	)
 	(wire
 		(pts
@@ -1805,7 +1841,7 @@
 	)
 	(wire
 		(pts
-			(xy 200.66 142.24) (xy 208.28 142.24)
+			(xy 201.93 137.16) (xy 208.28 137.16)
 		)
 		(stroke
 			(width 0)
@@ -1835,7 +1871,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 142.24) (xy 208.28 114.3)
+			(xy 208.28 137.16) (xy 208.28 114.3)
 		)
 		(stroke
 			(width 0)
@@ -1875,16 +1911,6 @@
 	)
 	(wire
 		(pts
-			(xy 176.53 90.17) (xy 190.5 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d78becf4-6e2b-4c45-9e30-2bfcf34108ee")
-	)
-	(wire
-		(pts
 			(xy 175.26 153.67) (xy 220.98 153.67)
 		)
 		(stroke
@@ -1915,7 +1941,7 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 116.84) (xy 173.99 116.84)
+			(xy 205.74 116.84) (xy 171.45 116.84)
 		)
 		(stroke
 			(width 0)
@@ -1975,7 +2001,7 @@
 	)
 	(wire
 		(pts
-			(xy 154.94 140.97) (xy 181.61 140.97)
+			(xy 154.94 140.97) (xy 182.88 140.97)
 		)
 		(stroke
 			(width 0)
@@ -2002,6 +2028,16 @@
 			(type default)
 		)
 		(uuid "fa72b59e-2076-46ca-a633-c5c3fe0a3cb4")
+	)
+	(wire
+		(pts
+			(xy 176.53 74.93) (xy 182.88 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc00fdd5-7b42-4cd1-a9b6-f263236323bf")
 	)
 	(wire
 		(pts
@@ -2083,9 +2119,9 @@
 		(at 147.32 100.33 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "784e99b8-a5eb-4fd2-a7c8-4ac64d49a9c5")
 		(property "Reference" "U2"
@@ -2823,8 +2859,8 @@
 		)
 	)
 	(sheet
-		(at 181.61 137.16)
-		(size 19.05 12.7)
+		(at 182.88 132.08)
+		(size 19.05 17.78)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -2839,7 +2875,7 @@
 		)
 		(uuid "d8b11486-4544-438c-b60f-b8bc1bab98dc")
 		(property "Sheetname" "RTC"
-			(at 181.61 136.4484 0)
+			(at 182.88 131.3684 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2848,7 +2884,7 @@
 			)
 		)
 		(property "Sheetfile" "rtc.kicad_sch"
-			(at 181.61 150.4446 0)
+			(at 182.88 150.4446 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2857,7 +2893,7 @@
 			)
 		)
 		(pin "RTC_INT" output
-			(at 200.66 147.32 0)
+			(at 201.93 147.32 0)
 			(uuid "74b11120-3522-4b5e-963d-fb382dfff8c8")
 			(effects
 				(font
@@ -2867,7 +2903,7 @@
 			)
 		)
 		(pin "SCL" bidirectional
-			(at 200.66 139.7 0)
+			(at 201.93 134.62 0)
 			(uuid "e1425d2d-4642-4084-b8cc-60cdff85406a")
 			(effects
 				(font
@@ -2877,7 +2913,7 @@
 			)
 		)
 		(pin "SDA" bidirectional
-			(at 200.66 142.24 0)
+			(at 201.93 137.16 0)
 			(uuid "804c909e-17c8-4c61-b927-871bf691be18")
 			(effects
 				(font
@@ -2887,7 +2923,7 @@
 			)
 		)
 		(pin "V_AA" input
-			(at 181.61 140.97 180)
+			(at 182.88 140.97 180)
 			(uuid "d56961a5-4440-428d-8060-bc9636ffcd8a")
 			(effects
 				(font
@@ -2897,8 +2933,18 @@
 			)
 		)
 		(pin "V_3V3" input
-			(at 181.61 147.32 180)
+			(at 182.88 147.32 180)
 			(uuid "2a73f762-e5b8-4d8e-904c-3068d3ecac60")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "CLK_log" input
+			(at 182.88 134.62 180)
+			(uuid "4525e7f2-f0bc-487a-a9b3-aa8a8478ede4")
 			(effects
 				(font
 					(size 1.27 1.27)
