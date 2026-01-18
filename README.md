@@ -1,5 +1,5 @@
 # BRACHIOSAURUS
-BRACHIOSAURUS is a low-cost ice melt monitoring system that relies upon the oscillatory motion of a pole in the wind to determine the exposed length of the pole. Placed on glaciers, it is meant for studying the melt of ice for long periods of time without human interaction.
+BRACHIOSAURUS is a low-cost ice melt monitoring system that relies on the oscillatory motion of a pole in the wind to determine the exposed length of the pole. Placed on glaciers, it is meant to study the melt of glaicer ice over long periods of time without requiring human interaction.
 
 ALL the information you need, as well as the answer to nearly ALL your questions, can be found in the BRACHI_user_manual.pdf document in the User Manuals folder.
 
