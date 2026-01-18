@@ -11,8 +11,8 @@ DIR = "/Users/felix/Documents/McGill_Bsc/Radio Lab/singing poles/Glacier stake d
 
 # physical constants of the pole for theoretical approximations
 YOUNG = 69e9 # young modulus of the pole in GPa
-R_O = 0.015875#0.01584#0.015875#1.277/100 # outer radius of the pole in m
-R_I = 0.0128#0.012785#0.0128#1.021/100 # inner radius of the pole in m
+R_O = 0.015875# outer radius of the pole in m
+R_I = 0.0128# inner radius of the pole in m
 DENSITY = 2700 # density of the pole in kg/m^3
 MASS = 0.677 # mass of the BRACHIOSAURUS in kg
 
