@@ -780,11 +780,11 @@
         }
       ],
       "filter_string": "",
-      "group_symbols": true,
+      "group_symbols": false,
       "include_excluded_from_bom": false,
       "name": "",
-      "sort_asc": true,
-      "sort_field": "Reference"
+      "sort_asc": false,
+      "sort_field": "LCSC part"
     },
     "connection_grid_size": 50.0,
     "drawing": {
@@ -858,6 +858,10 @@
     [
       "123d7408-b331-47f3-85f4-7e09b039178e",
       "Voltage divider"
+    ],
+    [
+      "62752ca3-9214-4ba1-a913-b3523da360a2",
+      "DFR0654_headers"
     ]
   ],
   "text_variables": {}
